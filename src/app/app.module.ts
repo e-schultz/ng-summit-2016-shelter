@@ -9,6 +9,9 @@ import { MdButtonModule } from '@angular2-material/button';
 import { MdSidenavModule } from '@angular2-material/sidenav';
 import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdGridListModule } from '@angular2-material/grid-list';
+import { MdInputModule } from '@angular2-material/input';
+import { MdRadioModule } from '@angular2-material/radio';
+import { MdCheckboxModule} from '@angular2-material/checkbox';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { MdGridListModule } from '@angular2-material/grid-list';
     BrowserModule,
     FormsModule,
     HttpModule,
+    MdCheckboxModule.forRoot(),
+    MdRadioModule.forRoot(),
+    MdInputModule.forRoot(),
     MdCardModule.forRoot(),
     MdCoreModule.forRoot(),
     MdButtonModule.forRoot(),
