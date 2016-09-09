@@ -1,6 +1,16 @@
-<md-sidenav-layout class="demo-root" fullscreen>
-  <md-sidenav #start>
-    Side Navigation To Go Here
+<md-sidenav-layout class="demo-root" fullscreen >
+  <md-sidenav #start align="end" mode="over">
+    <md-toolbar color="primary">
+    <span>Shelter Summit</span>
+    <span style="flex: 1 1 auto;"></span>
+    <span>Welcome</span>
+  </md-toolbar>
+    <p>
+      Details
+      and things
+      and forms
+
+    </p>
   </md-sidenav>
 
   <md-toolbar color="primary">
@@ -8,4 +18,42 @@
     <span style="flex: 1 1 auto;"></span>
     <span>Welcome</span>
   </md-toolbar>
+  <div class="demo-grid-list">
+    <md-grid-list cols="3" rowHeight="400px" gutterSize="5px">
+      <md-grid-tile *ngFor="let cat of cats">
+
+        <md-card>
+          <md-card-title-group>
+            <md-card-subtitle>{{cat.headline}}</md-card-subtitle>
+            <md-card-title>{{cat.name}}</md-card-title>
+            <img md-card-sm-image [src]="cat.images[0].url"/>
+          </md-card-title-group>
+
+          <md-card-content>
+           <div [innerHtml]="cat.description"></div>
+             
+          </md-card-content>
+          <md-card-actions>
+            <button md-button (click)="start.open()">DETAILS</button>
+            <button md-button>LIKE</button>
+            <button md-button>SHARE</button>
+          </md-card-actions>
+        </md-card>
+      </md-grid-tile>
+
+    </md-grid-list>
+
+    <!--<md-card *ngFor="let cat of cats" style="width:100px">
+          <md-card-subtitle>Subtitle first</md-card-subtitle>
+          <md-card-title>Card with title</md-card-title>
+          <md-card-content>
+            <p>This is supporting text.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+          </md-card-content>
+          <md-card-actions>
+            <button md-button>LIKE</button>
+            <button md-button>SHARE</button>
+          </md-card-actions>
+        </md-card>-->
+  </div>
 </md-sidenav-layout>
