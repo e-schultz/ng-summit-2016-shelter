@@ -8,6 +8,7 @@ import { MdCoreModule } from '@angular2-material/core';
 import { MdButtonModule } from '@angular2-material/button';
 import { MdSidenavModule } from '@angular2-material/sidenav';
 import { MdToolbarModule } from '@angular2-material/toolbar';
+import { MdGridListModule } from '@angular2-material/grid-list';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MdToolbarModule } from '@angular2-material/toolbar';
     MdCoreModule.forRoot(),
     MdButtonModule.forRoot(),
     MdSidenavModule.forRoot(),
-    MdToolbarModule.forRoot()
+    MdToolbarModule.forRoot(),
+    MdGridListModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
