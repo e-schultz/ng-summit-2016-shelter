@@ -1,3 +1,4 @@
+import { CatsActions } from './cats.actions';
 export interface ICat {
   id: string;
   name: string;
@@ -41,7 +42,7 @@ const INITIAL_STATE: ICat[] = [
     name: 'Simon',
     headline: 'Older cat.',
     description: `
-        	<p>
+									<p>
 Simon is a sweet, trusting FIV+ 3 year old cat with a lot of love to give. Simon loves to cuddle and is very affectionate and social. He also can be chatty, and likes to have a conversation with you. If you meow at him, he will respond to you with a meow of his own.</p>
         `,
     images: [{
@@ -61,5 +62,11 @@ Stubbs would love to be adopted into a home where there is another kitty for her
 
 ];
 export const cats = (state: ICat[] = INITIAL_STATE, action) => {
-  return state;
+  switch (action.type) {
+    case CatsActions.CAT_CREATED:
+      return [...state, action.payload];
+    default:
+      return state;
+  }
+
 };

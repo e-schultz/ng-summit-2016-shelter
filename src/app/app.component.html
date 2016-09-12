@@ -9,12 +9,12 @@
       <!--   <md-toolbar color="primary">Basic</md-toolbar> -->
       <md-card-content>
 
-        <form>
-          <md-input placeholder="Name" style="width: 100%"></md-input>
+        <form #catDetail="ngForm" (ngSubmit)="createCat(catDetail.value,catDetail.valid)" novalidate>
+          <md-input placeholder="Name" style="width: 100%" name="name" ngModel></md-input>
           <p>
-            <md-input style="width: 100%" placeholder="Headline"></md-input>
+            <md-input style="width: 100%" placeholder="Headline" name="headline" ngModel></md-input>
           </p>
-          <table style="width: 100%" cellspacing="0">
+       <!--   <table style="width: 100%" cellspacing="0">
             <tr>
               <td>
                 <md-input style="width: 100%" placeholder="Approx Age"></md-input>
@@ -27,9 +27,12 @@
                 </md-input>
               </td>
             </tr>
-          </table>
-          <textarea style="width:100%" rows="10" cols="50"></textarea>
+          </table>-->
+          <textarea name="description" style="width:100%" rows="10" cols="50" name="description" ngModel></textarea>
+          
+          <button md-raised-button color="primary" type="submit">Create</button>
         </form>
+        
       </md-card-content>
     </md-card>
   </md-sidenav>
@@ -58,6 +61,7 @@
           </md-card-title-group>
 
           <md-card-content>
+           
             <div [innerHtml]="cat.description"></div>
 
           </md-card-content>

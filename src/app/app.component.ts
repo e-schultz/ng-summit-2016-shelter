@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { select } from 'ng2-redux';
+import { select, NgRedux } from 'ng2-redux';
 import { Observable } from 'rxjs';
-import { ICat } from './store';
+import { ICat, IAppState, CatsActions } from './store';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [CatsActions]
 })
 export class AppComponent implements OnInit{
   title = 'app works!';
   @select() cats$: Observable<ICat[]>;
-  cats: any[];
-  constructor() {
+  constructor(private catsActions: CatsActions) {
   }
 
   ngOnInit() {
+  }
+  createCat(catModel: any, isValid: boolean) {
+    
+    this.catsActions.createCat(catModel);
   }
 }
