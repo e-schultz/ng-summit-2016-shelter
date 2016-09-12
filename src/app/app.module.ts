@@ -12,7 +12,8 @@ import { MdGridListModule } from '@angular2-material/grid-list';
 import { MdInputModule } from '@angular2-material/input';
 import { MdRadioModule } from '@angular2-material/radio';
 import { MdCheckboxModule} from '@angular2-material/checkbox';
-
+import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { rootReducer, IAppState } from './store';
 @NgModule({
   declarations: [
     AppComponent
@@ -29,9 +30,14 @@ import { MdCheckboxModule} from '@angular2-material/checkbox';
     MdButtonModule.forRoot(),
     MdSidenavModule.forRoot(),
     MdToolbarModule.forRoot(),
-    MdGridListModule.forRoot()
+    MdGridListModule.forRoot(),
+    NgReduxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, {});
+  }
+}
