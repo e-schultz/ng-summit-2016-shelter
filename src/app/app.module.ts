@@ -15,9 +15,11 @@ import { MdCheckboxModule} from '@angular2-material/checkbox';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { rootReducer, IAppState } from './store';
 import { HorizonService, CatsService } from './shared';
+import { CreateCatFormComponent } from './create-cat-form/create-cat-form.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateCatFormComponent
   ],
   imports: [
     BrowserModule,
