@@ -14,6 +14,7 @@ import { MdRadioModule } from '@angular2-material/radio';
 import { MdCheckboxModule} from '@angular2-material/checkbox';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { rootReducer, IAppState } from './store';
+import { HorizonService, CatsService } from './shared';
 @NgModule({
   declarations: [
     AppComponent
@@ -33,11 +34,12 @@ import { rootReducer, IAppState } from './store';
     MdGridListModule.forRoot(),
     NgReduxModule
   ],
-  providers: [],
+  providers: [HorizonService, CatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor(private ngRedux: NgRedux<IAppState>) {
+  constructor(private ngRedux: NgRedux<IAppState>, horizon: HorizonService) {
     ngRedux.configureStore(rootReducer, {});
+    //horizon.connect();
   }
 }

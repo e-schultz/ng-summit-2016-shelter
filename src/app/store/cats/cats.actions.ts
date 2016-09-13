@@ -2,10 +2,11 @@ import { generateId, randomRange } from '../../shared';
 import { Injectable } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../../store';
+import { CatsService } from '../../shared';
 @Injectable()
 export class CatsActions {
   static CAT_CREATED = 'CAT_CREATED';
-  constructor(private ngRedux: NgRedux<IAppState>) { };
+  constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
 
   createCat = ({name, headline, description}) => {
 
@@ -16,10 +17,14 @@ export class CatsActions {
     const id = generateId();
     const images = [{ url }];
 
-    this.ngRedux
-      .dispatch({
-        type: CatsActions.CAT_CREATED,
-        payload: {id, name, description, headline, images}
-    });
+    this.cats
+      .createCat({name, description, headline, images})
+      .subscribe(result => {
+        this.ngRedux
+        .dispatch({
+          type: CatsActions.CAT_CREATED,
+          payload: result,
+        });
+      });
   };
 }
