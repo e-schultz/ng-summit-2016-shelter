@@ -16,10 +16,14 @@ import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { rootReducer, IAppState } from './store';
 import { HorizonService, CatsService } from './shared';
 import { CreateCatFormComponent } from './create-cat-form/create-cat-form.component';
+import { CatDetailCardComponent } from './cat-detail-card/cat-detail-card.component';
+import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CreateCatFormComponent
+    CreateCatFormComponent,
+    CatDetailCardComponent,
+    CatEditFormComponent
   ],
   imports: [
     BrowserModule,

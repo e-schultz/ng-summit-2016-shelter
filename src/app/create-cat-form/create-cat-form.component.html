@@ -3,6 +3,7 @@
   <md-card-content>
 
     <form #catDetail="ngForm" (ngSubmit)="createCat(catDetail.value,catDetail.valid)" novalidate>
+      
       <md-input placeholder="Name" style="width: 100%" name="name" ngModel></md-input>
       <p>
         <md-input style="width: 100%" placeholder="Headline" name="headline" ngModel></md-input>
