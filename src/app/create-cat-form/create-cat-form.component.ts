@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-create-cat-form',
@@ -7,10 +7,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CreateCatFormComponent implements OnInit {
 
-  @Output() submitCat:EventEmitter<any> = new EventEmitter<any>();
+  @Output() submitCat: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
+
   }
 
   createCat(catModel: any, isValid: boolean) {
