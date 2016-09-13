@@ -11,16 +11,29 @@ export class CatsActions {
   static CATS_LOADED = 'CATS_LOADED';
   static CATS_DELETED = 'CATS_DELETED';
   static CAT_DELETED = 'CAT_DELETED';
+  static CAT_SELECTED = 'CAT_SELECTED';
+  static CAT_CLEARED = 'CAT_CLEARED';
 
-  public bob: ()=>number;
+  public bob: () => number;
 
   constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
+
+  clearSelectedCat = () => {
+    this.ngRedux.dispatch({type: CatsActions.CAT_CLEARED);
+  }
+  
+  selectCat = (cat) => {
+    cat = Object.assign({},cat,{isEditing: true});
+    this.ngRedux.dispatch({type: CatsActions.CAT_SELECTED, payload: cat});
+  }
 
   populateCats = () => {
     this.cats
       .createCat(INITIAL_STATE)
       .subscribe(n => this.listAll());
   };
+
+ 
 
   listAll = () => {
 
@@ -59,12 +72,12 @@ export class CatsActions {
     // for now, to avoid image uploading / etc, just pick a random 
     // kitty cat from placeKitten - meow!
     const randomImage = randomRange(100, 200);
-    const url = `https://placekitten.com/${randomImage}/${randomImage}`;
-    const images = [{ url }];
+    const imageUrl = `https://placekitten.com/${randomImage}/${randomImage}`;
+
     const id = generateId();
 
     this.cats
-      .createCat({ id, name, description, headline, images })
+      .createCat({ id, name, description, headline, imageUrl })
       .subscribe(result => {
         this.ngRedux
           .dispatch({

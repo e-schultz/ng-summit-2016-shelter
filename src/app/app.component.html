@@ -3,7 +3,7 @@
     <button md-raised-button color="primary" (click)="clearAllCats()">Clear Cats</button>
     <button md-raised-button color="primary" (click)="populateCats()">Populate Cats</button>
   </md-sidenav>
-  <md-sidenav #end align="end" mode="over" class="end">
+  <md-sidenav #end align="end" mode="over" class="end" (close)="clearCat()">
     <md-toolbar color="primary">
       <span>Shelter Summit</span>
       <span style="flex: 1 1 auto;"></span>
@@ -11,14 +11,15 @@
       <span>Welcome</span>
     </md-toolbar>
 
-    <app-create-cat-form (submitCat)="createCat($event)"></app-create-cat-form>
-
+    <!--<app-create-cat-form (submitCat)="createCat($event)"></app-create-cat-form>-->
+    <app-cat-edit-form [cat]="catEdit$ | async" *ngIf="(catEdit$ | async)?.isEditing"></app-cat-edit-form>
   </md-sidenav>
 
   <md-toolbar color="primary">
     <span>Shelter Summit</span>
     <span style="flex: 1 1 auto;"></span>
     <button md-raised-button color="primary" (click)="start.open()">Admin</button>
+    <button md-raised-button color="primary" (click)="displayAddCat()">Add Cat</button>
     <span>Welcome</span>
   </md-toolbar>
   <div class="demo-grid-list">
@@ -27,12 +28,15 @@
         <md-radio-button value="option_1">Male</md-radio-button>
         <md-radio-button value="option_2">Female</md-radio-button>
       </md-radio-group>
-
+      {{catEdit$ | async | json}}
     </md-toolbar>
     <md-grid-list cols="3" rowHeight="400px" gutterSize="5px">
       <md-grid-tile *ngFor="let cat of cats$ | async">
-
-        <md-card>
+        <app-cat-detail-card [cat]="cat" 
+        (displayEdit)="displayCat($event);" 
+        (deleteCat)="deleteCat($event)">
+        </app-cat-detail-card>
+        <!--<md-card>
           <md-card-title-group>
             <md-card-subtitle>{{cat.headline}}</md-card-subtitle>
             <md-card-title>{{cat.name}}</md-card-title>
@@ -48,9 +52,9 @@
             <button md-button (click)="end.open()">DETAILS</button>
             <button md-button>LIKE</button>
             <button md-button>SHARE</button>
-            <button md-button (click)="deleteCat(cat)">DELETE</button>
+            <button md-button (click)="delete(cat)">DELETE</button>
           </md-card-actions>
-        </md-card>
+        </md-card>-->
       </md-grid-tile>
 
     </md-grid-list>

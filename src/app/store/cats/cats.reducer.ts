@@ -7,7 +7,7 @@ export interface ICat {
   name: string;
   headline: string;
   description: string;
-  images: any[];
+  imageUrl: string;
 }
 
 
