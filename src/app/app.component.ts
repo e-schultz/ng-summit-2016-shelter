@@ -17,9 +17,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.catsActions.listAll();
   }
   createCat(catModel: any, isValid: boolean) {
     this.catsActions.createCat(catModel);
+  }
+  clearAllCats() {
+    this.catsActions.deleteAllCats();
+  }
+  populateCats() {
+    this.catsActions.populateCats();
+
+  }
+  deleteCat(cat) {
+    this.catsActions.deleteCat(cat);
   }
 }

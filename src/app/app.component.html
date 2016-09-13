@@ -1,26 +1,32 @@
 <md-sidenav-layout class="demo-root" fullscreen>
-  <md-sidenav #start align="end" mode="over">
+  <md-sidenav #start mode="over">
+    <button md-raised-button color="primary" (click)="clearAllCats()">Clear Cats</button>
+    <button md-raised-button color="primary" (click)="populateCats()">Populate Cats</button>
+  </md-sidenav>
+  <md-sidenav #end align="end" mode="over" class="end">
     <md-toolbar color="primary">
       <span>Shelter Summit</span>
       <span style="flex: 1 1 auto;"></span>
+
       <span>Welcome</span>
     </md-toolbar>
 
     <app-create-cat-form (submitCat)="createCat($event)"></app-create-cat-form>
-    
+
   </md-sidenav>
 
   <md-toolbar color="primary">
     <span>Shelter Summit</span>
     <span style="flex: 1 1 auto;"></span>
+    <button md-raised-button color="primary" (click)="start.open()">Admin</button>
     <span>Welcome</span>
   </md-toolbar>
   <div class="demo-grid-list">
     <md-toolbar [color]="myColor">
-<md-radio-group>
-  <md-radio-button value="option_1">Male</md-radio-button>
-  <md-radio-button value="option_2">Female</md-radio-button>
-</md-radio-group>
+      <md-radio-group>
+        <md-radio-button value="option_1">Male</md-radio-button>
+        <md-radio-button value="option_2">Female</md-radio-button>
+      </md-radio-group>
 
     </md-toolbar>
     <md-grid-list cols="3" rowHeight="400px" gutterSize="5px">
@@ -34,14 +40,15 @@
           </md-card-title-group>
 
           <md-card-content>
-           
+
             <div [innerHtml]="cat.description"></div>
 
           </md-card-content>
           <md-card-actions>
-            <button md-button (click)="start.open()">DETAILS</button>
+            <button md-button (click)="end.open()">DETAILS</button>
             <button md-button>LIKE</button>
             <button md-button>SHARE</button>
+            <button md-button (click)="deleteCat(cat)">DELETE</button>
           </md-card-actions>
         </md-card>
       </md-grid-tile>
