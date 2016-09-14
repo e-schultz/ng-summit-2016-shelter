@@ -13,27 +13,25 @@ export class CatsActions {
   static CAT_DELETED = 'CAT_DELETED';
   static CAT_SELECTED = 'CAT_SELECTED';
   static CAT_CLEARED = 'CAT_CLEARED';
-
+  static CAT_UPDATED = 'CAT_UPDATED';
   public bob: () => number;
 
   constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
 
   clearSelectedCat = () => {
-    this.ngRedux.dispatch({type: CatsActions.CAT_CLEARED);
-  }
-  
+    this.ngRedux.dispatch({type: CatsActions.CAT_CLEARED});
+  };
+
   selectCat = (cat) => {
-    cat = Object.assign({},cat,{isEditing: true});
-    this.ngRedux.dispatch({type: CatsActions.CAT_SELECTED, payload: cat});
-  }
+    const selectedCat = Object.assign({}, {currentCat: cat, isEditing: true});
+    this.ngRedux.dispatch({type: CatsActions.CAT_SELECTED, payload: selectedCat});
+  };
 
   populateCats = () => {
     this.cats
       .createCat(INITIAL_STATE)
       .subscribe(n => this.listAll());
   };
-
- 
 
   listAll = () => {
 
@@ -45,7 +43,7 @@ export class CatsActions {
         payload: n
       });
     });
-  }
+  };
 
   deleteCat = ({id}) => {
     return this.cats
@@ -56,7 +54,7 @@ export class CatsActions {
         payload: n
       });
     });
-  }
+  };
 
   deleteAllCats = () => {
     this.cats.deleteAllCats()
@@ -66,7 +64,24 @@ export class CatsActions {
       } ,
       err => console.error(`err: ${err} `));
 
-  }
+  };
+  submitCat = (cat) => {
+    if (!cat.id) {
+      this.createCat(cat);
+    } else {
+      this.updateCat(cat);
+    }
+  };
+
+  updateCat = (cat) => {
+    this.cats.createCat(cat).subscribe(result => {
+       this.ngRedux
+          .dispatch({
+            type: CatsActions.CAT_UPDATED,
+            payload: result,
+          });
+    });
+  };
 
   createCat = ({name, headline, description}) => {
     // for now, to avoid image uploading / etc, just pick a random 

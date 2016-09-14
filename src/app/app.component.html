@@ -11,8 +11,11 @@
       <span>Welcome</span>
     </md-toolbar>
 
-    <!--<app-create-cat-form (submitCat)="createCat($event)"></app-create-cat-form>-->
-    <app-cat-edit-form [cat]="catEdit$ | async" *ngIf="(catEdit$ | async)?.isEditing"></app-cat-edit-form>
+    <app-cat-edit-form 
+      [cat]="catEdit$ | async" 
+      *ngIf="isEditing$ | async" 
+      (submitCat)="submitCat($event)">
+    </app-cat-edit-form>
   </md-sidenav>
 
   <md-toolbar color="primary">
@@ -28,7 +31,7 @@
         <md-radio-button value="option_1">Male</md-radio-button>
         <md-radio-button value="option_2">Female</md-radio-button>
       </md-radio-group>
-      {{catEdit$ | async | json}}
+      
     </md-toolbar>
     <md-grid-list cols="3" rowHeight="400px" gutterSize="5px">
       <md-grid-tile *ngFor="let cat of cats$ | async">
