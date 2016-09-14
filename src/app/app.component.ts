@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   title = 'app works!';
   cat: any;
   @select() cats$: Observable<ICat[]>;
-  @select() catEdit$: Observable<any>;
+  @select(['catEdit','currentCat']) catEdit$: Observable<any>;
+  @select(['catEdit','isEditing'])  isEditing$:Observable<any>;
   @ViewChild('end') endNav: MdSidenav;
   constructor(private catsActions: CatsActions, private horizonService: HorizonService) {
 
@@ -29,21 +30,19 @@ export class AppComponent implements OnInit {
     this.catsActions.selectCat(cat);
   }
   ngOnInit() {
-    this.catEdit$.filter(n => n.isEditing === true).subscribe(n => {
+    this.isEditing$.filter(n => n).subscribe(n => {
       this.endNav.open();
     });
     this.catsActions.listAll();
   }
-  createCat(catModel: any, isValid: boolean) {
-    this.catsActions.createCat(catModel);
-  }
+
 
   displayAddCat() {
-    this.catsActions.selectCat();
+    this.catsActions.selectCat({});
   }
 
-  updateCat(catModel) {
-    this.catsActions.updateCat(catModel);
+  submitCat(catModel) {
+    this.catsActions.submitCat(catModel);
   }
   clearAllCats() {
     this.catsActions.deleteAllCats();

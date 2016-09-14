@@ -2,8 +2,9 @@
   <!--   <md-toolbar color="primary">Basic</md-toolbar> -->
   <md-card-content>
 
-    <form #catDetail="ngForm" (ngSubmit)="updateCat(catDetail.value,catDetail.valid)" novalidate>
-      
+    <form #catDetail="ngForm" (ngSubmit)="submitCat.emit(catDetail.value)" novalidate>
+      <input type="hidden" name="id" [ngModel]="cat?.id"/>
+      <input type="hidden" name="imageUrl" [ngModel]="cat?.imageUrl"/>
       <md-input placeholder="Name" style="width: 100%" name="name" [ngModel]="cat?.name"></md-input>
       <p>
         <md-input style="width: 100%" placeholder="Headline" name="headline" [ngModel]="cat?.headline"></md-input>
@@ -11,7 +12,9 @@
 
       <textarea name="description" style="width:100%" rows="10" cols="50" name="description" [ngModel]="cat?.description"></textarea>
 
-      <button md-raised-button color="primary" type="submit">Update</button>
+      <button md-raised-button color="primary" type="submit">
+        Submit
+      </button>
     </form>
 
   </md-card-content>
