@@ -83,7 +83,7 @@ export class CatsActions {
     });
   };
 
-  createCat = ({name, headline, description}) => {
+  createCat = ({name, headline, description, age, gender, breed}) => {
     // for now, to avoid image uploading / etc, just pick a random 
     // kitty cat from placeKitten - meow!
     const randomImage = randomRange(100, 200);
@@ -92,7 +92,7 @@ export class CatsActions {
     const id = generateId();
 
     this.cats
-      .createCat({ id, name, description, headline, imageUrl })
+      .createCat({ id, name, description, headline, imageUrl, age, gender, breed })
       .subscribe(result => {
         this.ngRedux
           .dispatch({

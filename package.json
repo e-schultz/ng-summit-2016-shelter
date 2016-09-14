@@ -31,8 +31,11 @@
     "@angular2-material/toolbar": "^2.0.0-alpha.8-1",
     "core-js": "^2.4.1",
     "ng2-redux": "^4.0.0-beta.0",
+    "object.entries": "^1.0.3",
+    "ramda": "^0.22.1",
     "redux": "^3.5.0",
     "rxjs": "5.0.0-beta.11",
+    "seamless-immutable": "^6.1.1",
     "ts-helpers": "^1.1.1",
     "uuid": "^2.0.2",
     "zone.js": "^0.6.17"
