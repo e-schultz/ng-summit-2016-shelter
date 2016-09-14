@@ -21,6 +21,10 @@ export const cats = (state: ICat[] = INITIAL_STATE, action) => {
       return [...action.payload];
     case CatsActions.CAT_CREATED:
       return [...state, action.payload];
+    case CatsActions.CAT_UPDATED:
+    return state.map(n=>{
+      return n.id !== action.payload.id ? n : Object.assign({},n, action.payload);
+    })
     default:
       return state;
   }
