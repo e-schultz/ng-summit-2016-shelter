@@ -8,12 +8,16 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 export class CatEditFormComponent implements OnInit, OnDestroy {
 
   @Input() cat: any;
+  @Input() catBreeds: any;
+  @Input() catAges: any;
+  @Input() catGenders: any;
+
   @Output() submitCat: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
-console.log('what!',this.cat)  
-}
+  
+  }
 
   ngOnDestroy() {
   }
