@@ -8,6 +8,9 @@ export interface ICat {
   headline: string;
   description: string;
   imageUrl: string;
+  breed: string;
+  age: string;
+  gender: string;
 }
 
 

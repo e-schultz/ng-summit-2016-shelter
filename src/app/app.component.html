@@ -1,5 +1,5 @@
 <md-sidenav-layout class="demo-root" fullscreen>
-  <md-sidenav #start mode="over">
+  <md-sidenav #start mode="side" class="start">
     <button md-raised-button color="primary" (click)="clearAllCats()">Clear Cats</button>
     <button md-raised-button color="primary" (click)="populateCats()">Populate Cats</button>
   </md-sidenav>
@@ -12,7 +12,10 @@
     </md-toolbar>
 
     <app-cat-edit-form 
-      [cat]="catEdit$ | async" 
+      [cat]="catEdit$ | async"
+      [catBreeds]="catBreeds$ | async"
+      [catAges]="catAges$ | async" 
+      [catGenders]="catGenders$ | async"
       *ngIf="isEditing$ | async" 
       (submitCat)="submitCat($event)">
     </app-cat-edit-form>
@@ -26,38 +29,40 @@
     <span>Welcome</span>
   </md-toolbar>
   <div class="demo-grid-list">
-    <md-toolbar [color]="myColor">
-      <md-radio-group>
-        <md-radio-button value="option_1">Male</md-radio-button>
-        <md-radio-button value="option_2">Female</md-radio-button>
-      </md-radio-group>
-      
+    <md-toolbar>
+    <ul>
+      <li *ngFor="let breed of catBreeds$ | async">
+       <md-checkbox  
+        [checked]="(filters$ | async)?.breed[breed.value]"
+        (change)="toggleFilter('breed',breed.value, $event)">{{breed.label}}
+      </md-checkbox>
+    </li>
+  </ul>
+  <ul>
+      <li *ngFor="let age of catAges$ | async">
+       <md-checkbox  
+        [checked]="(filters$ | async)?.age[age.value]"
+        (change)="toggleFilter('age',age.value, $event)">{{age.label}}
+      </md-checkbox>
+    </li>
+  </ul>
+       <ul>
+      <li *ngFor="let gender of catGenders$ | async">
+       <md-checkbox  
+        [checked]="(filters$ | async)?.gender[gender.value]"
+        (change)="toggleFilter('gender',gender.value, $event)">{{gender.label}}
+      </md-checkbox>
+    </li>
+  </ul>
     </md-toolbar>
     <md-grid-list cols="3" rowHeight="400px" gutterSize="5px">
-      <md-grid-tile *ngFor="let cat of cats$ | async">
+      <md-grid-tile *ngFor="let cat of filteredCats$ | async">
         <app-cat-detail-card [cat]="cat" 
         (displayEdit)="displayCat($event);" 
         (deleteCat)="deleteCat($event)">
         </app-cat-detail-card>
-        <!--<md-card>
-          <md-card-title-group>
-            <md-card-subtitle>{{cat.headline}}</md-card-subtitle>
-            <md-card-title>{{cat.name}}</md-card-title>
-            <img md-card-sm-image [src]="cat.images[0].url" />
-          </md-card-title-group>
-
-          <md-card-content>
-
-            <div [innerHtml]="cat.description"></div>
-
-          </md-card-content>
-          <md-card-actions>
-            <button md-button (click)="end.open()">DETAILS</button>
-            <button md-button>LIKE</button>
-            <button md-button>SHARE</button>
-            <button md-button (click)="delete(cat)">DELETE</button>
-          </md-card-actions>
-        </md-card>-->
+        
+       
       </md-grid-tile>
 
     </md-grid-list>
