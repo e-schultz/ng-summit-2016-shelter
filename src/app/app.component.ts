@@ -7,6 +7,7 @@ import { MdSidenav } from '@angular2-material/sidenav';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
 const R = require('ramda');
+import { activeFilters } from './store';
 
 @Component({
   selector: 'app-root',
@@ -56,22 +57,12 @@ export class AppComponent implements OnInit {
       this.endNav.open();
     });
 
-    this.filters$.subscribe(n => {
-      console.log('hi filters', n);
-    });
     this.catsActions.listAll();
-    this.filteredCats$ = this.cats$.combineLatest(this.filters$,
-    ( cats, filters: any ) => {
-       let getSelected = R.pipe(R.toPairs, R.filter(filterPair => filterPair[1]), R.map(filterPair => filterPair[0]));
-       let breed = getSelected(filters.breed);
-       let age = getSelected(filters.age);
-       let gender = getSelected(filters.gender);
-       let filterPredicate = (prop, filter) => (cat) => filter.length === 0 || filter.indexOf(cat[prop]) >= 0;
-       let breedFilter = filterPredicate('breed', breed);
-       let ageFilter = filterPredicate('age', age);
-       let genderFilter = filterPredicate('gender', gender);
-       return cats.filter(R.allPass([breedFilter, ageFilter, genderFilter]));
-    });
+
+    this.filteredCats$ = this.cats$
+      .combineLatest(this.filters$.map(activeFilters),
+      (cats, filters: any) => cats.filter(filters)
+    );
   }
 
 
