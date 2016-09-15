@@ -1,7 +1,7 @@
 import { FilterActions } from './filter.actions';
 import { combineReducers } from 'redux';
 import { getIn } from '../../shared';
-const R = require('ramda');
+// const R = require('ramda');
 const filterReducer = (property, INITIAL_STATE = {}) => (state = INITIAL_STATE, action) => {
   if (getIn(action, ['payload', 'property']) !== property && action.type !== FilterActions.CLEAR_FILTERS) {
     return state;

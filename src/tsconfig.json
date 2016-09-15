@@ -11,8 +11,7 @@
     "sourceMap": true,
     "target": "es5",
     "types": [
-      "hammerjs",
-      "ramda"
+      "hammerjs"
     ],  
     "typeRoots": [
       "../node_modules/@types"
