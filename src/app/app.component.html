@@ -2,13 +2,12 @@
   <md-sidenav #start mode="side" class="start">
     <button md-raised-button color="primary" (click)="clearAllCats()">Clear Cats</button>
     <button md-raised-button color="primary" (click)="populateCats()">Populate Cats</button>
+    <button md-raised-button color="primary" (click)="start.close()">Close</button>
   </md-sidenav>
   <md-sidenav #end align="end" mode="over" class="end" (close)="clearCat()">
     <md-toolbar color="primary">
-      <span>Shelter Summit</span>
+      <span>Cat Details</span>
       <span style="flex: 1 1 auto;"></span>
-
-      <span>Welcome</span>
     </md-toolbar>
 
     <app-cat-edit-form 
