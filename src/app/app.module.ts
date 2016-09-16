@@ -12,12 +12,12 @@ import { MdGridListModule } from '@angular2-material/grid-list';
 import { MdInputModule } from '@angular2-material/input';
 import { MdRadioModule } from '@angular2-material/radio';
 import { MdCheckboxModule} from '@angular2-material/checkbox';
-import { MdProgressCircleModule } from '@angular2-material/progress-circle';
-import { NgReduxModule, NgRedux } from 'ng2-redux';
-import { rootReducer, IAppState } from './store';
+import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
+import { rootReducer, IAppState, middleware} from './store';
 import { HorizonService, CatsService } from './shared';
 import { CatDetailCardComponent } from './cat-detail-card/cat-detail-card.component';
 import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
+import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,15 +37,15 @@ import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
     MdSidenavModule.forRoot(),
     MdToolbarModule.forRoot(),
     MdGridListModule.forRoot(),
-    MdProgressCircleModule.forRoot(),
+     MdProgressCircleModule.forRoot(),
     NgReduxModule
   ],
   providers: [HorizonService, CatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor(private ngRedux: NgRedux<IAppState>, horizon: HorizonService) {
-    ngRedux.configureStore(rootReducer, {});
-    //horizon.connect();
+  constructor(private ngRedux: NgRedux<IAppState>, horizon: HorizonService, devTools: DevToolsExtension) {
+    let enhancers = devTools.isEnabled() ? [ devTools.enhancer() ] : [];
+    ngRedux.configureStore(rootReducer, {}, [...middleware], [...enhancers]);
   }
 }
