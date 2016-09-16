@@ -4,10 +4,14 @@ import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../../store';
 import { CatsService } from '../../shared';
 import { INITIAL_STATE } from './cats.initial-state';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/delay';
 
 @Injectable()
 export class CatsActions {
   static CAT_CREATED = 'CAT_CREATED';
+  static CATS_LOADING = 'CATS_LOADING';
+  static CATS_LOADING_ERROR = 'CATS_LOADING_ERROR';
   static CATS_LOADED = 'CATS_LOADED';
   static CATS_DELETED = 'CATS_DELETED';
   static CAT_DELETED = 'CAT_DELETED';
@@ -37,12 +41,17 @@ export class CatsActions {
 
     return this.cats
     .listAll()
+    .do(n => this.ngRedux.dispatch({type: CatsActions.CATS_LOADING }))
+    .delay(1000)
+    .do(n=>console.log('what the fuck yo'))
     .subscribe(n => {
       this.ngRedux.dispatch({
         type: CatsActions.CATS_LOADED,
         payload: n
       });
-    });
+    },
+    (err) => this.ngRedux.dispatch({type: CatsActions.CATS_LOADING_ERROR})
+    );
   };
 
   deleteCat = ({id}) => {

@@ -12,6 +12,7 @@ import { MdGridListModule } from '@angular2-material/grid-list';
 import { MdInputModule } from '@angular2-material/input';
 import { MdRadioModule } from '@angular2-material/radio';
 import { MdCheckboxModule} from '@angular2-material/checkbox';
+import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { rootReducer, IAppState } from './store';
 import { HorizonService, CatsService } from './shared';
@@ -36,6 +37,7 @@ import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
     MdSidenavModule.forRoot(),
     MdToolbarModule.forRoot(),
     MdGridListModule.forRoot(),
+    MdProgressCircleModule.forRoot(),
     NgReduxModule
   ],
   providers: [HorizonService, CatsService],

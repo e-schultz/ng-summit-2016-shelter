@@ -54,6 +54,9 @@
     </li>
   </ul>
     </md-toolbar>
+    <div class="center-container" *ngIf="catsLoading$ | async">
+    <md-progress-circle mode="indeterminate"></md-progress-circle>
+    </div>
     <md-grid-list cols="3" rowHeight="400px" gutterSize="5px">
       <md-grid-tile *ngFor="let cat of filteredCats$ | async">
         <app-cat-detail-card [cat]="cat" 
