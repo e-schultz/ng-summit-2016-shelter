@@ -13,7 +13,7 @@ import { activeFilters } from './store';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [CatsActions, FilterActions],
+  providers: [CatsActions, FilterActions]
 
 })
 export class AppComponent implements OnInit {
@@ -21,11 +21,12 @@ export class AppComponent implements OnInit {
   cat: any;
   bob = true;
   @select() codeTables$: Observable<any>;
-  @select() cats$: Observable<ICat[]>;
+  @select() cats$: Observable<ICat[]> 
   @select(['catEdit', 'currentCat']) catEdit$: Observable<any>;
-  @select(['catEdit', 'isEditing'])  isEditing$: Observable<any>;
+  @select(['catEdit', 'isEditing']) isEditing$: Observable<any>;
   @select() filters$;
   public filteredCats$;
+  @select() catsLoading$:Observable<boolean>;
   @select(['codeTables', 'breeds']) catBreeds$;
   @select(['codeTables', 'ages']) catAges$;
   @select(['codeTables', 'genders']) catGenders$;
@@ -58,11 +59,16 @@ export class AppComponent implements OnInit {
     });
 
     this.catsActions.listAll();
-
+    
+    this.cats$.map(cats=>{
+      return cats.map(cat=>Object.assign({},cat,{name: cat.name.toUpperCase()}))
+    }).subscribe(n=>{
+      console.log('loud cats!',n);
+    })
     this.filteredCats$ = this.cats$
       .combineLatest(this.filters$.map(activeFilters),
       (cats, filters: any) => cats.filter(filters)
-    );
+      );
   }
 
 
