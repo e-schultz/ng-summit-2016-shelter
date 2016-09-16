@@ -4,9 +4,9 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import { ResourceService } from './resource.service';
 @Injectable()
-export class CatsService extends ResourceService<any> {
+export class BreedsService extends ResourceService<any> {
   
   constructor(horizonService: HorizonService) {
-    super(horizonService, 'cats');
+    super(horizonService, 'breeds');
   }
 };

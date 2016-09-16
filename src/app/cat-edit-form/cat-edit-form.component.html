@@ -26,7 +26,7 @@
         <tr>
           <td>Gender</td>
           <td>
-           <section class="radio-section">
+            <section class="radio-section">
               <md-radio-group [ngModel]="cat?.gender" name="gender" align="start">
                 <md-radio-button *ngFor="let o of catGenders" [value]="o.value">
                   {{o.label}}
@@ -39,12 +39,12 @@
           <td>Age</td>
           <td>
             <section class="radio-section">
-                <md-radio-group [ngModel]="cat?.age" name="age" align="start">
+              <md-radio-group [ngModel]="cat?.age" name="age" align="start">
                 <md-radio-button *ngFor="let o of catAges" [value]="o.value">
                   {{o.label}}
                 </md-radio-button>
               </md-radio-group>
-           
+
             </section>
           </td>
         </tr>

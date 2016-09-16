@@ -14,15 +14,19 @@ import { MdRadioModule } from '@angular2-material/radio';
 import { MdCheckboxModule} from '@angular2-material/checkbox';
 import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
 import { rootReducer, IAppState, middleware} from './store';
-import { HorizonService, CatsService } from './shared';
+import { HorizonService, CatsService, AgesService, BreedsService, GendersService, ResourceService } from './shared';
 import { CatDetailCardComponent } from './cat-detail-card/cat-detail-card.component';
 import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
+import { CatSummaryComponent } from './cat-summary/cat-summary.component';
+import { CatSummaryContainerComponent } from './cat-summary-container/cat-summary-container.component';
 @NgModule({
   declarations: [
     AppComponent,
     CatDetailCardComponent,
-    CatEditFormComponent
+    CatEditFormComponent,
+    CatSummaryComponent,
+    CatSummaryContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { MdProgressCircleModule } from '@angular2-material/progress-circle';
      MdProgressCircleModule.forRoot(),
     NgReduxModule
   ],
-  providers: [HorizonService, CatsService],
+  providers: [HorizonService, CatsService, AgesService, BreedsService, GendersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
