@@ -16,7 +16,7 @@ export class CatEditFormComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-  
+
   }
 
   ngOnDestroy() {
