@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { cats, ICat, catsLoading } from './cats';
+import { cats, ICat } from './cats';
+import { catsLoading } from './cats-loading';
 import { catEdit } from './cat-edit';
 import { codeTables } from './code-tables';
 import { filters } from './filters';
-export { ICat } from './cats';
 const  createLogger = require('redux-logger');
 
 export interface IAppState {
@@ -15,6 +15,5 @@ export interface IAppState {
 };
 
 export const middleware = [createLogger({level:'info', collapse: true })];
-
 export const rootReducer = combineReducers<IAppState>({ cats, catEdit, codeTables, filters, catsLoading });
 

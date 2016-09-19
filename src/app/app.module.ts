@@ -13,20 +13,25 @@ import { MdInputModule } from '@angular2-material/input';
 import { MdRadioModule } from '@angular2-material/radio';
 import { MdCheckboxModule} from '@angular2-material/checkbox';
 import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
-import { rootReducer, IAppState, middleware} from './store';
+import { rootReducer, IAppState, middleware, CatEpics } from './store';
+import { createEpicMiddleware } from 'redux-observable';
 import { HorizonService, CatsService, AgesService, BreedsService, GendersService, ResourceService } from './shared';
 import { CatDetailCardComponent } from './cat-detail-card/cat-detail-card.component';
 import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 import { CatSummaryComponent } from './cat-summary/cat-summary.component';
 import { CatSummaryContainerComponent } from './cat-summary-container/cat-summary-container.component';
+import { CatFilterContainerComponent } from './cat-filter-container/cat-filter-container.component';
+import { CatFilterListComponent } from './cat-filter-list/cat-filter-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     CatDetailCardComponent,
     CatEditFormComponent,
     CatSummaryComponent,
-    CatSummaryContainerComponent
+    CatSummaryContainerComponent,
+    CatFilterContainerComponent,
+    CatFilterListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,12 +49,18 @@ import { CatSummaryContainerComponent } from './cat-summary-container/cat-summar
      MdProgressCircleModule.forRoot(),
     NgReduxModule
   ],
-  providers: [HorizonService, CatsService, AgesService, BreedsService, GendersService],
+  providers: [HorizonService, CatsService, AgesService, BreedsService, GendersService, CatEpics],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  constructor(private ngRedux: NgRedux<IAppState>, horizon: HorizonService, devTools: DevToolsExtension) {
+export class AppModule {
+  constructor(private ngRedux: NgRedux<IAppState>,
+    horizon: HorizonService,
+    devTools: DevToolsExtension,
+    catEpics: CatEpics) {
+
+    const createCatEpic = createEpicMiddleware(catEpics.create);
+    const updateCatEpic = createEpicMiddleware(catEpics.update);
     let enhancers = devTools.isEnabled() ? [ devTools.enhancer() ] : [];
-    ngRedux.configureStore(rootReducer, {}, [...middleware], [...enhancers]);
+    ngRedux.configureStore(rootReducer, {}, [...middleware, createCatEpic, updateCatEpic], [...enhancers]);
   }
 }

@@ -1,3 +1,4 @@
 export * from './store';
-export { CatsActions } from './cats';
+export { CatsActions, CatEpics, ICat } from './cats';
 export * from './filters';
+export * from './code-tables';

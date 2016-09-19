@@ -2,37 +2,47 @@ import { Injectable } from '@angular/core';
 import { HorizonService } from './horizon.service';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/delay';
+import { randomRange } from './';
+const MIN_DELAY = 500;
+const MAX_DELAY = 2500;
 
 @Injectable()
 export abstract class ResourceService<T> {
   private collection: any;
+  
   constructor(horizonService: HorizonService, collectionName: string) {
     this.collection = horizonService.horizon(collectionName);
   }
 
-  delete(id) {
-    return this.collection.remove({ id });
+  delete = (id) => {
+    return this.collection.remove({ id })
+    .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 
-  listAll() {
-    return this.collection.fetch();
+  listAll =()  => {
+    return this.collection.fetch()
+    .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 
-  deleteAll() {
+  deleteAll = () => {
     return this.listAll()
-      .mergeMap(n => this.collection.removeAll(n));
+      .mergeMap(n => this.collection.removeAll(n))
+      .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 
-  create(item: T) {
+  create = (item: T) => {
     return this.collection
       .store(item)
-      .mergeMap(n => this.collection.find({ id: n.id }).fetch());
+      .mergeMap(n => this.collection.find({ id: n.id }).fetch())
+      .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 
 
   update(item: T) {
     return this.collection
       .store(item)
-      .mergeMap(n => this.collection.find({ id: n.id }).fetch());
+      .mergeMap(n => this.collection.find({ id: n.id }).fetch())
+      .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 };
