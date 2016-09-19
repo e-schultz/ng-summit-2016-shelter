@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
-import { ICat, FilterActions } from '../store';
-import { catBreeds, catAges, catGenders } from '../store';
+import { ICat, FilterActions } from '../../store';
+import { catBreeds, catAges, catGenders } from '../../store';
 
 @Component({
   selector: 'app-cat-filter-container',

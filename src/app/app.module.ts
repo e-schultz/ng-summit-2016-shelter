@@ -16,13 +16,14 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
 import { rootReducer, IAppState, middleware, CatEpics } from './store';
 import { createEpicMiddleware } from 'redux-observable';
 import { HorizonService, CatsService, AgesService, BreedsService, GendersService, ResourceService } from './shared';
-import { CatDetailCardComponent } from './cat-detail-card/cat-detail-card.component';
-import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
+import { CatDetailCardComponent } from './cat/cat-detail-card/cat-detail-card.component';
+import { CatEditFormComponent } from './cat/cat-edit-form/cat-edit-form.component';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
-import { CatSummaryComponent } from './cat-summary/cat-summary.component';
-import { CatSummaryContainerComponent } from './cat-summary-container/cat-summary-container.component';
-import { CatFilterContainerComponent } from './cat-filter-container/cat-filter-container.component';
-import { CatFilterListComponent } from './cat-filter-list/cat-filter-list.component';
+import { CatSummaryComponent } from './cat/cat-summary/cat-summary.component';
+import { CatSummaryContainerComponent } from './cat/cat-summary-container/cat-summary-container.component';
+import { CatFilterContainerComponent } from './cat/cat-filter-container/cat-filter-container.component';
+import { CatFilterListComponent } from './cat/cat-filter-list/cat-filter-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
