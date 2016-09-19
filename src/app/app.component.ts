@@ -6,9 +6,9 @@ import { HorizonService } from './shared';
 import { MdSidenav } from '@angular2-material/sidenav';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
-const R = require('ramda');
 import { activeFilters } from './store';
 import { catBreeds, catAges, catGenders } from './store';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
