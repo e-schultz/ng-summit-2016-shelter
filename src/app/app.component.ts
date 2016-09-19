@@ -30,16 +30,16 @@ export class AppComponent implements OnInit {
   @select(catAges) catAges$;
   @select(catGenders) catGenders$;
   @ViewChild('end') endNav: MdSidenav;
-  constructor(private CatActions: CatActions, private horizonService: HorizonService, private filterActions: FilterActions) {
+  constructor(private catActions: CatActions, private horizonService: HorizonService, private filterActions: FilterActions) {
 
   }
 
   clearCat() {
-    this.CatActions.clearSelectedCat();
+    this.catActions.clearSelectedCat();
   }
 
   displayCat(cat) {
-    this.CatActions.selectCat(cat);
+    this.catActions.selectCat(cat);
   }
   
   ngOnInit() {
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       this.endNav.open();
     });
 
-    this.CatActions.listAll();
+    this.catActions.listAll();
 
     this.filteredCats$ = this.cats$
       .combineLatest(this.filters$.map(activeFilters),
@@ -57,20 +57,20 @@ export class AppComponent implements OnInit {
 
 
   displayAddCat() {
-    this.CatActions.selectCat({});
+    this.catActions.selectCat({});
   }
 
   submitCat(catModel) {
-    this.CatActions.submitCat(catModel);
+    this.catActions.submitCat(catModel);
   }
   clearAllCats() {
-    this.CatActions.deleteAllCats();
+    this.catActions.deleteAllCats();
   }
   populateCats() {
-    this.CatActions.populateCats();
+    this.catActions.populateCats();
 
   }
   deleteCat(cat) {
-    this.CatActions.deleteCat(cat);
+    this.catActions.deleteCat(cat);
   }
 }
