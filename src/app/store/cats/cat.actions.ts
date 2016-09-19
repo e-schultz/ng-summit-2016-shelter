@@ -9,7 +9,7 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/debounceTime';
 
 @Injectable()
-export class CatsActions {
+export class CatActions {
   static CREATE_CAT = 'CREATE_CAT';
   static CREATING_CAT = 'CREATING_CAT';
   static CAT_CREATED = 'CAT_CREATED';
@@ -33,12 +33,12 @@ export class CatsActions {
   constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
 
   clearSelectedCat = () => {
-    this.ngRedux.dispatch({ type: CatsActions.CAT_CLEARED });
+    this.ngRedux.dispatch({ type: CatActions.CAT_CLEARED });
   };
 
   selectCat = (cat) => {
     const selectedCat = Object.assign({}, { currentCat: cat });
-    this.ngRedux.dispatch({ type: CatsActions.CAT_SELECTED, payload: selectedCat });
+    this.ngRedux.dispatch({ type: CatActions.CAT_SELECTED, payload: selectedCat });
   };
 
   populateCats = () => {
@@ -52,15 +52,15 @@ export class CatsActions {
 
     return this.cats
       .listAll()
-      .do(n => this.ngRedux.dispatch({ type: CatsActions.CATS_LOADING }))
+      .do(n => this.ngRedux.dispatch({ type: CatActions.CATS_LOADING }))
       .delay(randomRange(500, 1500))
       .subscribe(n => {
         this.ngRedux.dispatch({
-          type: CatsActions.CATS_LOADED,
+          type: CatActions.CATS_LOADED,
           payload: n
         });
       },
-      (err) => this.ngRedux.dispatch({ type: CatsActions.CATS_LOADING_ERROR })
+      (err) => this.ngRedux.dispatch({ type: CatActions.CATS_LOADING_ERROR })
       );
   };
 
@@ -69,7 +69,7 @@ export class CatsActions {
       .delete(id)
       .subscribe(n => {
         this.ngRedux.dispatch({
-          type: CatsActions.CAT_DELETED,
+          type: CatActions.CAT_DELETED,
           payload: n
         });
       });
@@ -79,7 +79,7 @@ export class CatsActions {
     this.cats.deleteAll()
       .subscribe(
       cat => {
-        this.ngRedux.dispatch({ type: CatsActions.CAT_DELETED, payload: cat });
+        this.ngRedux.dispatch({ type: CatActions.CAT_DELETED, payload: cat });
       },
       err => console.error(`err: ${err} `));
 
@@ -95,19 +95,19 @@ export class CatsActions {
   updateCat = (cat) => {
     // with epic 
 
-    this.ngRedux.dispatch({ type: CatsActions.UPDATE_CAT, payload: cat });
+    this.ngRedux.dispatch({ type: CatActions.UPDATE_CAT, payload: cat });
     /* Without Epic */
 
     /*
-    this.ngRedux.dispatch({type: CatsActions.UPDATING_CAT});
+    this.ngRedux.dispatch({type: CatActions.UPDATING_CAT});
     this.cats.update(cat).subscribe(result => {
        this.ngRedux
           .dispatch({
-            type: CatsActions.CAT_UPDATED,
+            type: CatActions.CAT_UPDATED,
             payload: result,
           });
     },
-    err => this.ngRedux.dispatch({type: CatsActions.CAT_UPDATE_ERROR, payload: err}));
+    err => this.ngRedux.dispatch({type: CatActions.CAT_UPDATE_ERROR, payload: err}));
     */
   };
 
@@ -119,7 +119,7 @@ export class CatsActions {
 
     const id = generateId();
     this.ngRedux.dispatch({
-      type: CatsActions.CREATE_CAT,
+      type: CatActions.CREATE_CAT,
       payload: {
         id, name, description, headline, imageUrl, age, gender, breed
       }
@@ -132,12 +132,12 @@ export class CatsActions {
       .subscribe(result => {
         this.ngRedux
           .dispatch({
-            type: CatsActions.CAT_CREATED,
+            type: CatActions.CAT_CREATED,
             payload: result,
           });
       },
       err => {
-        this.ngRedux.dispatch({type: CatsActions.CAT_CREATE_ERROR});
+        this.ngRedux.dispatch({type: CatActions.CAT_CREATE_ERROR});
       });
       */
   };
