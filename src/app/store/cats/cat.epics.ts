@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CatsActions } from './';
+import { CatActions } from './';
 import { ActionsObservable } from 'redux-observable';
 import { Action } from 'redux';
 import { CatsService } from '../../shared';
@@ -24,29 +24,29 @@ export class CatEpics {
 
   create = (action$: ActionsObservable<IPayloadAction>) => {
     let dispatch = this.dispatch;
-    let errorHandler = createErrorHandler(CatsActions.CAT_CREATE_ERROR);
-    let catCreated = createSuccessHandler(CatsActions.CAT_CREATED);
+    let errorHandler = createErrorHandler(CatActions.CAT_CREATE_ERROR);
+    let catCreated = createSuccessHandler(CatActions.CAT_CREATED);
 
     let createCat = ({payload}) => this.cats.create(payload)
       .map(result => catCreated(result))
       .catch(err => errorHandler(err));
 
-    return action$.ofType(CatsActions.CREATE_CAT)
-      .do(n => dispatch({ type: CatsActions.CREATING_CAT }))
+    return action$.ofType(CatActions.CREATE_CAT)
+      .do(n => dispatch({ type: CatActions.CREATING_CAT }))
       .mergeMap(n => createCat(n));
   }
 
   update = (action$: ActionsObservable<IPayloadAction>) => {
     let dispatch = this.dispatch;
-    let errorHandler = createErrorHandler({type: CatsActions.CAT_UPDATE_ERROR});
-    let catUpdated = createSuccessHandler(CatsActions.CAT_UPDATED);
+    let errorHandler = createErrorHandler({type: CatActions.CAT_UPDATE_ERROR});
+    let catUpdated = createSuccessHandler(CatActions.CAT_UPDATED);
 
     let updateCat = ({payload}) => this.cats.update(payload)
       .map(result => catUpdated(result))
       .catch(err => errorHandler(err));
 
-    return action$.ofType(CatsActions.UPDATE_CAT)
-      .do(n => dispatch({ type: CatsActions.UPDATING_CAT }))
+    return action$.ofType(CatActions.UPDATE_CAT)
+      .do(n => dispatch({ type: CatActions.UPDATING_CAT }))
       .mergeMap(n => updateCat(n));
 
 
