@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   @select() cats$: Observable<ICat[]>;
   @select(['catEdit', 'currentCat']) catEdit$: Observable<any>;
   @select(['catEdit', 'isEditing']) isEditing$: Observable<any>;
+  @select(['catEdit', 'isPending']) isPending$: Observable<any>;
   @select() filters$;
   public filteredCats$;
   @select() catsLoading$: Observable<boolean>;

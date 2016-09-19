@@ -11,7 +11,7 @@ export class CatEditFormComponent implements OnInit, OnDestroy {
   @Input() catBreeds: any;
   @Input() catAges: any;
   @Input() catGenders: any;
-
+  @Input() isPending: boolean;
   @Output() submitCat: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 

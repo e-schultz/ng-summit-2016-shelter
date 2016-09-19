@@ -52,7 +52,7 @@
 
       <textarea name="description" style="width:100%" rows="10" cols="50" name="description" [ngModel]="cat?.description"></textarea>
 
-      <button md-raised-button color="primary" type="submit">
+      <button md-raised-button color="primary" type="submit" [disabled]="isPending">
         Submit
       </button>
     </form>

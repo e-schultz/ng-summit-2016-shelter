@@ -1,3 +1,3 @@
 export * from './store';
-export { CatsActions } from './cats';
+export { CatsActions, CatEpics } from './cats';
 export * from './filters';
