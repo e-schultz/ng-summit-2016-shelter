@@ -8,7 +8,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
 const R = require('ramda');
 import { activeFilters } from './store';
-
+import { catBreeds, catAges, catGenders } from './store';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,20 +26,11 @@ export class AppComponent implements OnInit {
   @select() filters$;
   public filteredCats$;
   @select() catsLoading$: Observable<boolean>;
-  @select(['codeTables', 'breeds']) catBreeds$;
-  @select(['codeTables', 'ages']) catAges$;
-  @select(['codeTables', 'genders']) catGenders$;
+  @select(catBreeds) catBreeds$;
+  @select(catAges) catAges$;
+  @select(catGenders) catGenders$;
   @ViewChild('end') endNav: MdSidenav;
   constructor(private catsActions: CatsActions, private horizonService: HorizonService, private filterActions: FilterActions) {
-
-  }
-
-  toggleFilter(property, value, {checked}) {
-    if (checked) {
-      this.filterActions.addFilter(property, value);
-    } else {
-      this.filterActions.removeFilter(property, value);
-    }
 
   }
 

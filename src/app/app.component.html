@@ -29,8 +29,13 @@
     <span>Welcome</span>
   </md-toolbar>
   <div class="demo-grid-list">
-    <md-toolbar>
-    <ul>
+   
+      <app-cat-filter-container>
+        
+      </app-cat-filter-container>
+    <!--
+       <md-toolbar>
+      <ul>
       <li *ngFor="let breed of catBreeds$ | async">
        <md-checkbox  
         [checked]="(filters$ | async)?.breed[breed.value]"
@@ -54,7 +59,9 @@
       </md-checkbox>
     </li>
   </ul>
-    </md-toolbar>
+  </md-toolbar>
+  -->
+    
     <div class="center-container" *ngIf="catsLoading$ | async">
     <md-progress-circle mode="indeterminate"></md-progress-circle>
     </div>
