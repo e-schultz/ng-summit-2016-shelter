@@ -33,7 +33,7 @@ export class CatsActions {
 
   populateCats = () => {
     this.cats
-      .createCat(INITIAL_STATE)
+      .create(INITIAL_STATE)
       .subscribe(n => this.listAll());
   };
 
@@ -56,7 +56,7 @@ export class CatsActions {
 
   deleteCat = ({id}) => {
     return this.cats
-    .deleteCat(id)
+    .delete(id)
     .subscribe(n => {
       this.ngRedux.dispatch({
         type: CatsActions.CAT_DELETED,
@@ -66,7 +66,7 @@ export class CatsActions {
   };
 
   deleteAllCats = () => {
-    this.cats.deleteAllCats()
+    this.cats.deleteAll()()
     .subscribe(
       cat => {
         this.ngRedux.dispatch({type: CatsActions.CAT_DELETED, payload: cat});
@@ -83,7 +83,7 @@ export class CatsActions {
   };
 
   updateCat = (cat) => {
-    this.cats.createCat(cat).subscribe(result => {
+    this.cats.update(cat).subscribe(result => {
        this.ngRedux
           .dispatch({
             type: CatsActions.CAT_UPDATED,
@@ -101,7 +101,7 @@ export class CatsActions {
     const id = generateId();
 
     this.cats
-      .createCat({ id, name, description, headline, imageUrl, age, gender, breed })
+      .create({ id, name, description, headline, imageUrl, age, gender, breed })
       .subscribe(result => {
         this.ngRedux
           .dispatch({
