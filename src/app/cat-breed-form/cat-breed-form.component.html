@@ -1,0 +1,18 @@
+<md-card class="demo-card demo-basic">
+  <!--   <md-toolbar color="primary">Basic</md-toolbar> -->
+  <md-card-content>
+
+    <form #breedDetail="ngForm" (ngSubmit)="submitBreed.emit(breedDetail.value)" novalidate>
+      <input type="hidden" name="id" [ngModel]="breed?.id" />
+      <md-input placeholder="value" style="width: 100%" name="value" [ngModel]="breed?.value"></md-input>
+      <p>
+        <md-input style="width: 100%" placeholder="Label" name="label" [ngModel]="breed?.label"></md-input>
+      </p>
+    
+      <button md-raised-button color="primary" type="submit" [disabled]="isPending">
+        Submit
+      </button>
+    </form>
+
+  </md-card-content>
+</md-card>
