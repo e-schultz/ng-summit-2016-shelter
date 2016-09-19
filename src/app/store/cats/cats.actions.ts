@@ -33,12 +33,12 @@ export class CatsActions {
   constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
 
   clearSelectedCat = () => {
-    this.ngRedux.dispatch({type: CatsActions.CAT_CLEARED});
+    this.ngRedux.dispatch({ type: CatsActions.CAT_CLEARED });
   };
 
   selectCat = (cat) => {
-    const selectedCat = Object.assign({}, {currentCat: cat});
-    this.ngRedux.dispatch({type: CatsActions.CAT_SELECTED, payload: selectedCat});
+    const selectedCat = Object.assign({}, { currentCat: cat });
+    this.ngRedux.dispatch({ type: CatsActions.CAT_SELECTED, payload: selectedCat });
   };
 
   populateCats = () => {
@@ -53,34 +53,34 @@ export class CatsActions {
     return this.cats
       .listAll()
       .do(n => this.ngRedux.dispatch({ type: CatsActions.CATS_LOADING }))
-    .delay(randomRange(500, 1500))
-    .subscribe(n => {
-      this.ngRedux.dispatch({
-        type: CatsActions.CATS_LOADED,
-        payload: n
-      });
-    },
-    (err) => this.ngRedux.dispatch({type: CatsActions.CATS_LOADING_ERROR})
-    );
+      .delay(randomRange(500, 1500))
+      .subscribe(n => {
+        this.ngRedux.dispatch({
+          type: CatsActions.CATS_LOADED,
+          payload: n
+        });
+      },
+      (err) => this.ngRedux.dispatch({ type: CatsActions.CATS_LOADING_ERROR })
+      );
   };
 
   deleteCat = ({id}) => {
     return this.cats
-    .delete(id)
-    .subscribe(n => {
-      this.ngRedux.dispatch({
-        type: CatsActions.CAT_DELETED,
-        payload: n
+      .delete(id)
+      .subscribe(n => {
+        this.ngRedux.dispatch({
+          type: CatsActions.CAT_DELETED,
+          payload: n
+        });
       });
-    });
   };
 
   deleteAllCats = () => {
     this.cats.deleteAll()
-    .subscribe(
+      .subscribe(
       cat => {
-        this.ngRedux.dispatch({type: CatsActions.CAT_DELETED, payload: cat});
-      } ,
+        this.ngRedux.dispatch({ type: CatsActions.CAT_DELETED, payload: cat });
+      },
       err => console.error(`err: ${err} `));
 
   };
@@ -95,7 +95,7 @@ export class CatsActions {
   updateCat = (cat) => {
     // with epic 
 
-    this.ngRedux.dispatch({type: CatsActions.UPDATE_CAT, payload: cat });
+    this.ngRedux.dispatch({ type: CatsActions.UPDATE_CAT, payload: cat });
     /* Without Epic */
 
     /*
