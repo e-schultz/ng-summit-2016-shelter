@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs';
-import { ICat, CatsActions, FilterActions } from './store';
+import { ICat, CatActions, FilterActions } from './store';
 import { HorizonService } from './shared';
 import { MdSidenav } from '@angular2-material/sidenav';
 import 'rxjs/add/operator/filter';
@@ -13,7 +13,7 @@ import { catBreeds, catAges, catGenders } from './store';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [CatsActions, FilterActions]
+  providers: [CatActions, FilterActions]
 
 })
 export class AppComponent implements OnInit {
@@ -30,16 +30,16 @@ export class AppComponent implements OnInit {
   @select(catAges) catAges$;
   @select(catGenders) catGenders$;
   @ViewChild('end') endNav: MdSidenav;
-  constructor(private catsActions: CatsActions, private horizonService: HorizonService, private filterActions: FilterActions) {
+  constructor(private CatActions: CatActions, private horizonService: HorizonService, private filterActions: FilterActions) {
 
   }
 
   clearCat() {
-    this.catsActions.clearSelectedCat();
+    this.CatActions.clearSelectedCat();
   }
 
   displayCat(cat) {
-    this.catsActions.selectCat(cat);
+    this.CatActions.selectCat(cat);
   }
   
   ngOnInit() {
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       this.endNav.open();
     });
 
-    this.catsActions.listAll();
+    this.CatActions.listAll();
 
     this.filteredCats$ = this.cats$
       .combineLatest(this.filters$.map(activeFilters),
@@ -57,20 +57,20 @@ export class AppComponent implements OnInit {
 
 
   displayAddCat() {
-    this.catsActions.selectCat({});
+    this.CatActions.selectCat({});
   }
 
   submitCat(catModel) {
-    this.catsActions.submitCat(catModel);
+    this.CatActions.submitCat(catModel);
   }
   clearAllCats() {
-    this.catsActions.deleteAllCats();
+    this.CatActions.deleteAllCats();
   }
   populateCats() {
-    this.catsActions.populateCats();
+    this.CatActions.populateCats();
 
   }
   deleteCat(cat) {
-    this.catsActions.deleteCat(cat);
+    this.CatActions.deleteCat(cat);
   }
 }
