@@ -2,14 +2,14 @@ import { combineReducers } from 'redux';
 import { cats, ICat } from './cats';
 import { catsLoading } from './cats-loading';
 import { catEdit } from './cat-edit';
-import { codeTables } from './code-tables';
+import { codeTables, ICodeTables } from './code-tables';
 import { filters } from './filters';
 const  createLogger = require('redux-logger');
 
 export interface IAppState {
   cats?: ICat[];
   catEdit?: ICat;
-  codeTables?: any;
+  codeTables?: ICodeTables;
   filters?: any;
   catsLoading?: boolean;
 };
