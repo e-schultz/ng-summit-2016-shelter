@@ -1,20 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs';
-import { ICat, CatActions, FilterActions } from './store';
-import { HorizonService } from './shared';
+import { ICat, CatActions } from './store';
 import { MdSidenav } from '@angular2-material/sidenav';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
 import { filterCheck } from './store';
 import { catBreeds, catAges, catGenders } from './store';
 
-console.log('Filter acitons are!', FilterActions, CatActions);
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [CatActions, FilterActions]
+  providers: [CatActions]
 
 })
 export class AppComponent implements OnInit {
@@ -31,7 +29,7 @@ export class AppComponent implements OnInit {
   @select(catAges) catAges$;
   @select(catGenders) catGenders$;
   @ViewChild('end') endNav: MdSidenav;
-  constructor(private catActions: CatActions, private horizonService: HorizonService, private filterActions: FilterActions) {
+  constructor(private catActions: CatActions) {
 
   }
 
@@ -42,7 +40,7 @@ export class AppComponent implements OnInit {
   displayCat(cat) {
     this.catActions.selectCat(cat);
   }
-  
+
   ngOnInit() {
     this.isEditing$.filter(n => n).subscribe(n => {
       this.endNav.open();

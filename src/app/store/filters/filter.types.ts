@@ -1,8 +1,8 @@
-declare  interface IFilter {
+interface IFilter {
   [key: string]: boolean;
 }
 
-declare interface IFilters {
+interface IFilters {
   age: IFilter;
   breed: IFilter;
   gender: IFilter;
