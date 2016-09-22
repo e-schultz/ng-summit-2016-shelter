@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { cats, ICat } from './cats';
-import { catsLoading } from './cats-loading';
+import { catsLoading, ICatsLoading } from './cats-loading';
 import { catEdit } from './cat-edit';
 import { codeTables, ICodeTables } from './code-tables';
 import { filters, IFilters } from './filters';
@@ -11,7 +11,7 @@ export interface IAppState {
   catEdit?: ICat;
   codeTables?: ICodeTables;
   filters?: IFilters;
-  catsLoading?: boolean;
+  catsLoading?: ICatsLoading;
 };
 
 export const middleware = [createLogger({level:'info', collapse: true })];
