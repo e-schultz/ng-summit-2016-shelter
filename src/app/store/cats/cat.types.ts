@@ -1,4 +1,4 @@
-export interface ICat {
+declare interface ICat {
   id: string;
   name: string;
   headline: string;
@@ -8,3 +8,6 @@ export interface ICat {
   age: string;
   gender: string;
 };
+
+declare interface ICats extends Array<ICat> { }
+export { ICat, ICats };

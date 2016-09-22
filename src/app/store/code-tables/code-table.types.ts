@@ -1,15 +1,15 @@
-export interface ICodeValue {
+declare interface ICodeValue {
   value: string;
   label: string;
 }
 
-export interface ICodeTable {
-  [index: number]: ICodeValue;
-};
+declare interface ICodeTable extends Array<ICodeValue> { }
 
 
-export interface ICodeTables {
+declare interface ICodeTables {
   breeds: ICodeTable;
   ages: ICodeTable;
   genders: ICodeTable;
 };
+
+export { ICodeValue, ICodeTable, ICodeTables };

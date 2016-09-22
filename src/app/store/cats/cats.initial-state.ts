@@ -1,6 +1,6 @@
-import { ICat } from './cats.reducer';
+import { ICats } from './cat.types';
 
-export const INITIAL_STATE: ICat[] = [
+export const INITIAL_STATE: ICats = [
   {
     id: 'e6b1f090-d5b1-4572-a538-28a41cc8e960',
     name: 'Bandit',

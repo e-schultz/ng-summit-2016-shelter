@@ -1,30 +1,21 @@
 import { CatActions } from './cat.actions';
+import { ICats } from './cat.types';
 
-const INITIAL_STATE: ICat[] = [];
+const INITIAL_STATE: ICats = [];
+const { CAT_CREATED, CAT_DELETED, CATS_DELETED, CATS_LOADED, CAT_UPDATED } = CatActions;
 
-export interface ICat {
-  id: string;
-  name: string;
-  headline: string;
-  description: string;
-  imageUrl: string;
-  breed: string;
-  age: string;
-  gender: string;
-}
+export const cats = (state: ICats = INITIAL_STATE, action) => {
 
-
-export const cats = (state: ICat[] = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CatActions.CAT_DELETED:
+    case CAT_DELETED:
       return state.filter(n => n.id !== action.payload.id);
-    case CatActions.CATS_DELETED:
+    case CATS_DELETED:
       return [];
-    case CatActions.CATS_LOADED:
+    case CATS_LOADED:
       return [...action.payload];
-    case CatActions.CAT_CREATED:
+    case CAT_CREATED:
       return [...state, action.payload];
-    case CatActions.CAT_UPDATED:
+    case CAT_UPDATED:
     return state.map(n => {
       return n.id !== action.payload.id ? n : Object.assign({}, n, action.payload);
     });
