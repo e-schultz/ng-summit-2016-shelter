@@ -1,2 +1,2 @@
-type ICatsLoading = Boolean;
+type ICatsLoading = boolean;
 export { ICatsLoading };
