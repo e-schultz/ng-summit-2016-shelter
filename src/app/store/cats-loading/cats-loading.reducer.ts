@@ -1,7 +1,6 @@
 import { CatActions } from '../cats/cat.actions';
-import { ICatsLoading } from './cats-loading.types';
 
-export const catsLoading = (state: ICatsLoading = false, action) => {
+export const catsLoading = (state = false, action) => {
   switch (action.type) {
     case CatActions.CATS_LOADING:
       return true;
