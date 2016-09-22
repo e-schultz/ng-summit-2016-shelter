@@ -9,6 +9,7 @@ import 'rxjs/add/operator/combineLatest';
 import { filterCheck } from './store';
 import { catBreeds, catAges, catGenders } from './store';
 
+console.log('Filter acitons are!', FilterActions, CatActions);
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
