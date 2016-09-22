@@ -6,7 +6,7 @@ import { HorizonService } from './shared';
 import { MdSidenav } from '@angular2-material/sidenav';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
-import { activeFilters } from './store';
+import { filterCheck } from './store';
 import { catBreeds, catAges, catGenders } from './store';
 
 @Component({
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     this.catActions.listAll();
 
     this.filteredCats$ = this.cats$
-      .combineLatest(this.filters$.map(activeFilters),
+      .combineLatest(this.filters$.map(filterCheck),
       (cats, filters: any) => cats.filter(filters)
       );
   }

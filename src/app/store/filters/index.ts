@@ -1,2 +1,2 @@
 export { FilterActions } from './filter.actions';
-export { filters, activeFilters } from './filters.reducer';
+export { filters, filterCheck } from './filters.reducer';
