@@ -1,4 +1,6 @@
-export const INITIAL_STATE = [{
+import { ICodeTable } from './code-table.types';
+
+export const INITIAL_STATE: ICodeTable = [{
   value: 'senior',
   label: 'Senior'
 }, {
