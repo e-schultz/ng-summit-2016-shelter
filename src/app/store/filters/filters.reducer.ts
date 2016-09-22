@@ -1,8 +1,9 @@
 import { FilterActions } from './filter.actions';
 import { combineReducers } from 'redux';
 import { getIn } from '../../shared';
+import { IFilters, IFilter } from './filter.types';
 
-const createFilterReducer = (property, INITIAL_STATE = {}) => (state = INITIAL_STATE, action) => {
+const createFilterReducer = (property, INITIAL_STATE: IFilter = {}) => (state = INITIAL_STATE, action) => {
   if (getIn(action, ['payload', 'property']) !== property && action.type !== FilterActions.CLEAR_FILTERS) {
     return state;
   }
@@ -18,11 +19,13 @@ const createFilterReducer = (property, INITIAL_STATE = {}) => (state = INITIAL_S
   }
 };
 
+
 const age = createFilterReducer('age');
 const breed = createFilterReducer('breed');
 const gender = createFilterReducer('gender');
 
-export const filters = combineReducers({ age, breed, gender });
+export const filters = combineReducers<IFilters>({ age, breed, gender });
+
 
 /**
  * The shape of the filter state before applying this looks something like:
