@@ -57,7 +57,7 @@ export class BreedsActions {
   };
 
   deleteAll = () => {
-    this.breeds.deleteAll()()
+    this.breeds.deleteAll()
       .subscribe(
       cat => {
         this.ngRedux.dispatch({ type: BreedsActions.BREED_DELETED, payload: cat });
