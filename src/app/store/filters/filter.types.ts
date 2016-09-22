@@ -1,3 +1,5 @@
+import { Action } from 'redux';
+
 interface IFilter {
   [key: string]: boolean;
 }
@@ -8,4 +10,13 @@ interface IFilters {
   gender: IFilter;
 };
 
-export { IFilter, IFilters };
+interface IFilterActionPayload {
+  property: string;
+  value: string;
+};
+
+interface IFilterAction extends Action {
+  payload?: IFilterActionPayload;
+}
+
+export { IFilter, IFilters, IFilterActionPayload, IFilterAction };

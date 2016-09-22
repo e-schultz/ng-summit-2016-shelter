@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../../store';
+import { IFilterAction } from './filter.types';
+
 @Injectable()
 export class FilterActions {
   static FILTER_ADDED = 'FILTER_ADDED';
@@ -11,16 +13,16 @@ export class FilterActions {
 
   }
 
-  addFilter = (property,  value) => {
-    this.ngRedux.dispatch({type: FilterActions.FILTER_ADDED, payload: { property, value }});
+  addFilter = (property: string,  value: string) => {
+    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.FILTER_ADDED, payload: { property, value }});
   };
 
-  removeFilter = (property,  value) => {
-    this.ngRedux.dispatch({type: FilterActions.FILTER_REMOVED, payload: { property, value }});
+  removeFilter = (property: string,  value: string) => {
+    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.FILTER_REMOVED, payload: { property, value }});
   };
 
   clearFilters = () => {
-    this.ngRedux.dispatch({type: FilterActions.CLEAR_FILTERS});
+    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.CLEAR_FILTERS});
   };
 
 };
