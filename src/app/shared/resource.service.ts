@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HorizonService } from './horizon.service';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
@@ -10,7 +11,7 @@ const MAX_DELAY = 2500;
 @Injectable()
 export abstract class ResourceService<T> {
   private collection: any;
-  
+
   constructor(horizonService: HorizonService, collectionName: string) {
     this.collection = horizonService.horizon(collectionName);
   }
@@ -20,7 +21,7 @@ export abstract class ResourceService<T> {
     .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 
-  listAll =()  => {
+  listAll = (): Observable<T>  => {
     return this.collection.fetch()
     .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
@@ -31,7 +32,7 @@ export abstract class ResourceService<T> {
       .delay(randomRange(MIN_DELAY, MAX_DELAY));
   }
 
-  create = (item: T) => {
+  create = (item: T | T[]): Observable<T | T[]> => {
     return this.collection
       .store(item)
       .mergeMap(n => this.collection.find({ id: n.id }).fetch())
@@ -39,7 +40,7 @@ export abstract class ResourceService<T> {
   }
 
 
-  update(item: T) {
+  update = (item: T): Observable<T>  => {
     return this.collection
       .store(item)
       .mergeMap(n => this.collection.find({ id: n.id }).fetch())

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IAppState } from '../../store';
 import { CatActions } from './';
 import { ActionsObservable } from 'redux-observable';
 import { Action } from 'redux';
@@ -18,7 +19,7 @@ let createSuccessHandler = (successType) => result => ({type: successType, paylo
 @Injectable()
 export class CatEpics {
   dispatch: any;
-  constructor(private cats: CatsService, ngRedux: NgRedux<any>) {
+  constructor(private cats: CatsService, ngRedux: NgRedux<IAppState>) {
     this.dispatch = ngRedux.dispatch;
   }
 

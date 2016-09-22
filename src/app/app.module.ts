@@ -58,7 +58,7 @@ export class AppModule {
     const createCatEpic = createEpicMiddleware(catEpics.create);
     const updateCatEpic = createEpicMiddleware(catEpics.update);
     let enhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
-    console.log('yo!', rootReducer);
+
     ngRedux.configureStore(rootReducer, {}, [...middleware, createCatEpic, updateCatEpic], [...enhancers]);
   }
 }
