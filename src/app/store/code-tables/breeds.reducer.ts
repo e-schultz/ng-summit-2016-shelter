@@ -17,8 +17,7 @@ export const breeds = (state = INITIAL_STATE, action) => {
           let result = Object.assign({}, n, { label: action.payload.label });
           console.log('result is!', result);
           return result;
-        }
-        else {
+        } else {
           return n;
         }
 
