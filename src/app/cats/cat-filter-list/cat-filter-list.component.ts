@@ -17,9 +17,9 @@ export class CatFilterListComponent implements OnInit {
 
   }
 
-  toggleFilter(property, value, {checked} ) {
+  toggleFilter(property, id, {checked} ) {
     this.filterChange.emit({
-      property, value, checked
+      property, id, checked
     });
   }
 

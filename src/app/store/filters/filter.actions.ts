@@ -13,12 +13,12 @@ export class FilterActions {
 
   }
 
-  addFilter = (property: string,  value: string) => {
-    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.FILTER_ADDED, payload: { property, value }});
+  addFilter = (property: string,  id: string) => {
+    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.FILTER_ADDED, payload: { property, id }});
   };
 
-  removeFilter = (property: string,  value: string) => {
-    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.FILTER_REMOVED, payload: { property, value }});
+  removeFilter = (property: string,  id: string) => {
+    this.ngRedux.dispatch<IFilterAction>({type: FilterActions.FILTER_REMOVED, payload: { property, id }});
   };
 
   clearFilters = () => {

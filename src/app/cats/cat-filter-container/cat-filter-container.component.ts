@@ -18,11 +18,11 @@ export class CatFilterContainerComponent implements OnInit {
 
   constructor(private filterActions: FilterActions) { }
 
-  toggleFilter({property, value, checked}) {
+  toggleFilter({property, id, checked}) {
     if (checked) {
-         this.filterActions.addFilter(property, value);
+         this.filterActions.addFilter(property, id);
     } else {
-        this.filterActions.removeFilter(property, value);
+        this.filterActions.removeFilter(property, id);
     }
 
   }

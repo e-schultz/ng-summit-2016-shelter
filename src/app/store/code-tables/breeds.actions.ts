@@ -83,12 +83,12 @@ export class BreedActions {
     });
   };
 
-  createBreed = ({value, label}) => {
+  createBreed = ({id, label}) => {
     // for now, to avoid image uploading / etc, just pick a random 
     // kitty cat from placeKitten - meow!
-    const id = value;
+    
     this.breeds
-      .create({ id, value, label })
+      .create({ id, label })
       .subscribe(result => {
         this.ngRedux
           .dispatch({

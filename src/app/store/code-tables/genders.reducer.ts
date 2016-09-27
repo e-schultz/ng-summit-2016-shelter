@@ -1,10 +1,10 @@
 import { ICodeTable } from './code-table.types';
 
 export const INITIAL_STATE: ICodeTable = [{
-  value: 'male',
+  id: 'male',
   label: 'Male'
 }, {
-  value: 'female',
+  id: 'female',
   label: 'Female'
 }];
 
