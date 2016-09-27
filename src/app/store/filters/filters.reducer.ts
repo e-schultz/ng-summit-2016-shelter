@@ -7,7 +7,7 @@ const { FILTER_ADDED, FILTER_REMOVED, CLEAR_FILTERS } = FilterActions;
 
 function createFilterReducer(property, INITIAL_STATE: IFilter = {}) {
   return function filterReducer(state = INITIAL_STATE, action) {
-    const value = getIn(action, ['payload', 'value']);
+    const id = getIn(action, ['payload', 'id']);
     const actionProperty = getIn(action, ['payload', 'property']);
     const type = action.type;
 
@@ -17,9 +17,9 @@ function createFilterReducer(property, INITIAL_STATE: IFilter = {}) {
 
     switch (type) {
       case FILTER_ADDED:
-        return Object.assign({}, state, { [value]: true });
+        return Object.assign({}, state, { [id]: true });
       case FILTER_REMOVED:
-        return Object.assign({}, state, { [value]: false });
+        return Object.assign({}, state, { [id]: false });
       case CLEAR_FILTERS:
         return Object.assign({}, INITIAL_STATE);
       default:

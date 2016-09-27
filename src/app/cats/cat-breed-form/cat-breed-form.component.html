@@ -2,9 +2,9 @@
   <!--   <md-toolbar color="primary">Basic</md-toolbar> -->
   <md-card-content>
 
-    <form #breedDetail="ngForm" (ngSubmit)="submitBreed.emit(breedDetail.value)" novalidate>
+    <form #breedDetail="ngForm" (ngSubmit)="submitBreed.emit(breedDetail.id)" novalidate>
       <input type="hidden" name="id" [ngModel]="breed?.id" />
-      <md-input placeholder="value" style="width: 100%" name="value" [ngModel]="breed?.value"></md-input>
+      <md-input placeholder="id" style="width: 100%" name="id" [ngModel]="breed?.id"></md-input>
       <p>
         <md-input style="width: 100%" placeholder="Label" name="label" [ngModel]="breed?.label"></md-input>
       </p>

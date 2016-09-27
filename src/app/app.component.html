@@ -29,38 +29,9 @@
     <span>Welcome</span>
   </md-toolbar>
   <div class="demo-grid-list">
+  <app-cat-filter-container>
+  </app-cat-filter-container>
    
-      <app-cat-filter-container>
-        
-      </app-cat-filter-container>
-    <!--
-       <md-toolbar>
-      <ul>
-      <li *ngFor="let breed of catBreeds$ | async">
-       <md-checkbox  
-        [checked]="(filters$ | async)?.breed[breed.value]"
-        (change)="toggleFilter('breed',breed.value, $event)">{{breed.label}}
-      </md-checkbox>
-    </li>
-  </ul>
-  <ul>
-      <li *ngFor="let age of catAges$ | async">
-       <md-checkbox  
-        [checked]="(filters$ | async)?.age[age.value]"
-        (change)="toggleFilter('age',age.value, $event)">{{age.label}}
-      </md-checkbox>
-    </li>
-  </ul>
-       <ul>
-      <li *ngFor="let gender of catGenders$ | async">
-       <md-checkbox  
-        [checked]="(filters$ | async)?.gender[gender.value]"
-        (change)="toggleFilter('gender',gender.value, $event)">{{gender.label}}
-      </md-checkbox>
-    </li>
-  </ul>
-  </md-toolbar>
-  -->
     
     <div class="center-container" *ngIf="catsLoading$ | async">
     <md-progress-circle mode="indeterminate"></md-progress-circle>
