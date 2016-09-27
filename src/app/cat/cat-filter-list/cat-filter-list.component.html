@@ -1,8 +1,0 @@
-<ul>
-  <li *ngFor="let item of filterGroup">
-    <md-checkbox 
-      [checked]="activeFilters[filterProperty][item.value]" 
-      (change)="toggleFilter(filterProperty,item.value, $event)">{{item.label}}
-    </md-checkbox>
-  </li>
-</ul>
