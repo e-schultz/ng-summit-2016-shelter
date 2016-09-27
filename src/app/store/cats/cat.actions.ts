@@ -33,7 +33,9 @@ export class CatActions {
   constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
 
   clearSelectedCat = () => {
-    this.ngRedux.dispatch({ type: CatActions.CAT_CLEARED });
+    if (this.ngRedux.getState().catEdit.isEditing) {
+      this.ngRedux.dispatch({ type: CatActions.CAT_CLEARED });
+    }
   };
 
   selectCat = (cat) => {
@@ -50,14 +52,14 @@ export class CatActions {
 
   listAll = () => {
 
+    this.ngRedux.dispatch({ type: CatActions.CATS_LOADING });
     return this.cats
       .listAll()
-      .do(n => this.ngRedux.dispatch({ type: CatActions.CATS_LOADING }))
       .delay(randomRange(500, 1500))
-      .subscribe(n => {
+      .subscribe(cats => {
         this.ngRedux.dispatch({
           type: CatActions.CATS_LOADED,
-          payload: n
+          payload: cats
         });
       },
       (err) => this.ngRedux.dispatch({ type: CatActions.CATS_LOADING_ERROR })

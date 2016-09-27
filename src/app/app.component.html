@@ -31,8 +31,7 @@
   <div class="demo-grid-list">
   <app-cat-filter-container>
   </app-cat-filter-container>
-   
-    
+
     <div class="center-container" *ngIf="catsLoading$ | async">
     <md-progress-circle mode="indeterminate"></md-progress-circle>
     </div>
@@ -45,7 +44,26 @@
         
        
       </md-grid-tile>
+      <md-grid-tile>
+        <div class="clearfix" *ngIf="(cats$ | async)?.length > 0">
+          <div class="sm-col sm-col4">
+            <b>All Cats</b>
+            <app-cat-short-list
+              [cats]="cats$"
+              [breeds]="catBreeds$">
+            </app-cat-short-list>
+          </div>
+          <div class="sm-col sm-col4">
+            <b>Filtered Cats</b>
+            <app-cat-short-list
+              [cats]="filteredCats$"
+              [breeds]="catBreeds$">
+            </app-cat-short-list>
+          </div>
+        </div>
 
+      </md-grid-tile>
+      
     </md-grid-list>
 
   </div>

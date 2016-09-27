@@ -21,6 +21,7 @@ import { CatEditFormComponent } from './cats/cat-edit-form/cat-edit-form.compone
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 import { CatFilterContainerComponent } from './cats/cat-filter-container/cat-filter-container.component';
 import { CatFilterListComponent } from './cats/cat-filter-list/cat-filter-list.component';
+import { CatShortListComponent } from './cats/cat-short-list/cat-short-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CatFilterListComponent } from './cats/cat-filter-list/cat-filter-list.c
     CatDetailCardComponent,
     CatEditFormComponent,
     CatFilterContainerComponent,
-    CatFilterListComponent
+    CatFilterListComponent,
+    CatShortListComponent
   ],
   imports: [
     BrowserModule,
