@@ -1,5 +1,5 @@
 declare interface ICodeValue {
-  value: string;
+  id: string;
   label: string;
 }
 

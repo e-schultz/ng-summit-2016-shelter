@@ -16,7 +16,7 @@
           <td>
             <section class="radio-section">
               <md-radio-group [ngModel]="cat?.breed" name="breed" align="start">
-                <md-radio-button *ngFor="let o of catBreeds" [value]="o.value">
+                <md-radio-button *ngFor="let o of catBreeds" [value]="o.id">
                   {{o.label}}
                 </md-radio-button>
               </md-radio-group>
@@ -28,7 +28,7 @@
           <td>
             <section class="radio-section">
               <md-radio-group [ngModel]="cat?.gender" name="gender" align="start">
-                <md-radio-button *ngFor="let o of catGenders" [value]="o.value">
+                <md-radio-button *ngFor="let o of catGenders" [value]="o.id">
                   {{o.label}}
                 </md-radio-button>
               </md-radio-group>
@@ -40,7 +40,7 @@
           <td>
             <section class="radio-section">
               <md-radio-group [ngModel]="cat?.age" name="age" align="start">
-                <md-radio-button *ngFor="let o of catAges" [value]="o.value">
+                <md-radio-button *ngFor="let o of catAges" [value]="o.id">
                   {{o.label}}
                 </md-radio-button>
               </md-radio-group>

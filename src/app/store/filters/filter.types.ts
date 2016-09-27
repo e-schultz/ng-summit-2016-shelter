@@ -12,7 +12,7 @@ interface IFilters {
 
 interface IFilterActionPayload {
   property: string;
-  value: string;
+  id: string;
 };
 
 interface IFilterAction extends Action {
