@@ -42,11 +42,22 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isEditing$.filter(n => n).subscribe(n => {
-      this.endNav.open();
-    });
 
     this.catActions.listAll();
+
+    this.isEditing$.filter(n => n).subscribe(n => {
+      if(!this.endNav.opened) {
+        this.endNav.open();
+      }
+    });
+
+     this.isEditing$.filter(n => !n).subscribe(n => {
+      if(this.endNav.opened) {
+        this.endNav.close();
+      }
+    });
+
+
 
     this.filteredCats$ = this.cats$
       .combineLatest(this.filters$.map(filterCheck),
