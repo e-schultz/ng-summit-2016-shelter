@@ -3,22 +3,30 @@ import { combineReducers } from 'redux';
 import { getIn } from '../../shared';
 import { IFilters, IFilter } from './filter.types';
 
-const createFilterReducer = (property, INITIAL_STATE: IFilter = {}) => (state = INITIAL_STATE, action) => {
-  if (getIn(action, ['payload', 'property']) !== property && action.type !== FilterActions.CLEAR_FILTERS) {
-    return state;
-  }
-   switch (action.type) {
-    case FilterActions.FILTER_ADDED:
-      return Object.assign({}, state, {[action.payload.value]: true});
-    case FilterActions.FILTER_REMOVED:
-      return Object.assign({}, state, {[action.payload.value]: false});
-    case FilterActions.CLEAR_FILTERS:
-      return Object.assign({}, INITIAL_STATE);
-   default:
-    return state;
-  }
-};
+const { FILTER_ADDED, FILTER_REMOVED, CLEAR_FILTERS } = FilterActions;
 
+function createFilterReducer(property, INITIAL_STATE: IFilter = {}) {
+  return function filterReducer(state = INITIAL_STATE, action) {
+    const value = getIn(action, ['payload', 'value']);
+    const actionProperty = getIn(action, ['payload', 'property']);
+    const type = action.type;
+
+    if (actionProperty !== property && type !== CLEAR_FILTERS) {
+      return state;
+    }
+
+    switch (type) {
+      case FILTER_ADDED:
+        return Object.assign({}, state, { [value]: true });
+      case FILTER_REMOVED:
+        return Object.assign({}, state, { [value]: false });
+      case CLEAR_FILTERS:
+        return Object.assign({}, INITIAL_STATE);
+      default:
+        return state;
+    }
+  };
+}
 
 const age = createFilterReducer('age');
 const breed = createFilterReducer('breed');
@@ -51,4 +59,5 @@ export const filterCheck = (filterState) => {
   const genderFilter = filterPredicate('gender', selectedGender);
   return R.allPass([breedFilter, ageFilter, genderFilter]);
 };
+
 
