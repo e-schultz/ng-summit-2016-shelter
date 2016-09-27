@@ -2,16 +2,13 @@ import { Injectable } from '@angular/core';
 import { IAppState } from '../../store';
 import { CatActions } from './';
 import { ActionsObservable } from 'redux-observable';
-import { Action } from 'redux';
 import { CatsService } from '../../shared';
+import { IPayloadAction } from '../../store/payload-action.type';
 import { NgRedux } from 'ng2-redux';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs';
 
-interface IPayloadAction extends Action {
-  payload: any;
-}
 
 let createErrorHandler = (errType) => err => Observable.of({ type: errType, payload: err });
 let createSuccessHandler = (successType) => result => ({type: successType, payload: result});

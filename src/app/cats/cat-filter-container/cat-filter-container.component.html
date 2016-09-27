@@ -1,0 +1,35 @@
+<div class="clearfix">
+<!-- <md-grid-list cols="3" gutterSize="5px" rowHeight="fit"> -->
+<!--  <md-grid-tile> -->
+  <div class="sm-col sm-col-4">
+    <app-cat-filter-list 
+      filterProperty="breed" 
+      [activeFilters]="filters$ | async" 
+      [filterGroup]="catBreeds$ | async" 
+      (filterChange)="toggleFilter($event)">
+    </app-cat-filter-list>
+  </div>
+  <!-- </md-grid-tile> -->
+<!--  <md-grid-tile> -->
+  <div class="sm-col sm-col4">
+    <app-cat-filter-list 
+      filterProperty="age" 
+      [activeFilters]="filters$ | async" 
+      [filterGroup]="catAges$ | async" 
+      (filterChange)="toggleFilter($event)">
+    </app-cat-filter-list>
+  </div>
+  <!-- </md-grid-tile> -->
+<!--  <md-grid-tile> -->
+  <div class="sm-col sm-col4">
+    <app-cat-filter-list 
+      filterProperty="gender" 
+      [activeFilters]="filters$ | async" 
+      [filterGroup]="catGenders$ | async" 
+      (filterChange)="toggleFilter($event)">
+    </app-cat-filter-list>
+  </div>
+<!--
+  </md-grid-tile> -->
+<!-- </md-grid-list> -->
+</div>

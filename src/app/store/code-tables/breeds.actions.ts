@@ -7,7 +7,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
 @Injectable()
-export class BreedsActions {
+export class BreedActions {
   static BREED_CREATED = 'BREED_CREATED';
   static BREEDS_LOADING = 'BREEDS_LOADING';
   static BREEDS_LOADING_ERROR = 'BREEDS_LOADING_ERROR';
@@ -33,15 +33,15 @@ export class BreedsActions {
 
     return this.breeds
       .listAll()
-      .do(n => this.ngRedux.dispatch({ type: BreedsActions.BREEDS_LOADING }))
+      .do(n => this.ngRedux.dispatch({ type: BreedActions.BREEDS_LOADING }))
       .delay(1000)
       .subscribe(n => {
         this.ngRedux.dispatch({
-          type: BreedsActions.BREEDS_LOADED,
+          type: BreedActions.BREEDS_LOADED,
           payload: n
         });
       },
-      (err) => this.ngRedux.dispatch({ type: BreedsActions.BREEDS_LOADING_ERROR })
+      (err) => this.ngRedux.dispatch({ type: BreedActions.BREEDS_LOADING_ERROR })
       );
   };
 
@@ -50,7 +50,7 @@ export class BreedsActions {
       .delete(id)
       .subscribe(n => {
         this.ngRedux.dispatch({
-          type: BreedsActions.BREED_DELETED,
+          type: BreedActions.BREED_DELETED,
           payload: n
         });
       });
@@ -60,7 +60,7 @@ export class BreedsActions {
     this.breeds.deleteAll()
       .subscribe(
       cat => {
-        this.ngRedux.dispatch({ type: BreedsActions.BREED_DELETED, payload: cat });
+        this.ngRedux.dispatch({ type: BreedActions.BREED_DELETED, payload: cat });
       },
       err => console.error(`err: ${err} `));
 
@@ -77,7 +77,7 @@ export class BreedsActions {
     this.breeds.update(breed).subscribe(result => {
       this.ngRedux
         .dispatch({
-          type: BreedsActions.BREED_UPDATED,
+          type: BreedActions.BREED_UPDATED,
           payload: result,
         });
     });
@@ -92,7 +92,7 @@ export class BreedsActions {
       .subscribe(result => {
         this.ngRedux
           .dispatch({
-            type: BreedsActions.BREED_CREATED,
+            type: BreedActions.BREED_CREATED,
             payload: result,
           });
       });
