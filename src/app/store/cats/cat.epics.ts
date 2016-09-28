@@ -50,5 +50,13 @@ export class CatEpics {
 
   }
 
+ updateCatForm = (action$: ActionsObservable<IPayloadAction>) => {
+
+    return action$
+      .ofType(CatActions.CAT_FORM_UPDATE)
+      .debounceTime(500)
+      .map(n => Object.assign({}, n, {type: CatActions.CAT_FORM_UPDATED}));
+  }
+
 
 }

@@ -46,14 +46,21 @@ export class AppComponent implements OnInit {
     this.catActions.listAll();
 
     this.isEditing$.filter(n => n).subscribe(n => {
-      if(!this.endNav.opened) {
-        this.endNav.open();
+      // If we try to open while it's currently going through a transition
+      // material will throw an error
+      // need better way to keep this in sync based on state
+      if (!this.endNav.opened) {
+        this.endNav.open().catch(e => console.log('error', e));
       }
     });
 
      this.isEditing$.filter(n => !n).subscribe(n => {
-      if(this.endNav.opened) {
-        this.endNav.close();
+       // If we try to open while it's currently going through a transition
+      // material will throw an error
+      // need better way to keep this in sync based on state
+
+      if (this.endNav.opened) {
+        this.endNav.close().catch(e => console.log('error', e));
       }
     });
 

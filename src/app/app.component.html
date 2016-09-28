@@ -17,6 +17,7 @@
       [catGenders]="catGenders$ | async"
       *ngIf="isEditing$ | async" 
       [isPending]="isPending$ | async"
+      (catChange)="catActions.updateCatForm($event)"
       (submitCat)="submitCat($event)">
     </app-cat-edit-form>
   </md-sidenav>
