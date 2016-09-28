@@ -1,6 +1,6 @@
 import { ICodeTable } from './code-table.types';
 
-export const INITIAL_STATE: ICodeTable = [{
+const INITIAL_STATE: ICodeTable = [{
   id: 'male',
   label: 'Male'
 }, {

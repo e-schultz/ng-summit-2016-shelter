@@ -1,7 +1,7 @@
 import { generateId, randomRange } from '../../shared';
 import { Injectable } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
-import { IAppState } from '../../store';
+import { IAppState, ICat } from '../../store';
 import { CatsService } from '../../shared';
 import { INITIAL_STATE } from './cats.initial-state';
 import 'rxjs/add/operator/do';
@@ -29,25 +29,24 @@ export class CatActions {
   static CAT_CLEARED = 'CAT_CLEARED';
   static CAT_FORM_UPDATE = 'CAT_FORM_UPDATE';
   static CAT_FORM_UPDATED = 'CAT_FORM_UPDATED';
-  public bob: () => number;
-
-  constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
+  private dispatch;
+  constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) {
+    this.dispatch = ngRedux.dispatch;
+  };
 
   updateCatForm = (cat) => {
-    this.ngRedux.dispatch({
-      type: CatActions.CAT_FORM_UPDATE,
-      payload: cat
-    });
+    this.dispatch({ type: CatActions.CAT_FORM_UPDATE, payload: cat });
   }
+
   clearSelectedCat = () => {
     if (this.ngRedux.getState().catEdit.isEditing) {
-      this.ngRedux.dispatch({ type: CatActions.CAT_CLEARED });
+      this.dispatch({ type: CatActions.CAT_CLEARED });
     }
   };
 
   selectCat = (cat) => {
     const selectedCat = Object.assign({}, { currentCat: cat });
-    this.ngRedux.dispatch({ type: CatActions.CAT_SELECTED, payload: selectedCat });
+    this.dispatch({ type: CatActions.CAT_SELECTED, payload: selectedCat });
   };
 
   populateCats = () => {
@@ -59,17 +58,17 @@ export class CatActions {
 
   listAll = () => {
 
-    this.ngRedux.dispatch({ type: CatActions.CATS_LOADING });
+    this.dispatch({ type: CatActions.CATS_LOADING });
     return this.cats
       .listAll()
       .delay(randomRange(500, 1500))
       .subscribe(cats => {
-        this.ngRedux.dispatch({
+        this.dispatch({
           type: CatActions.CATS_LOADED,
           payload: cats
         });
       },
-      (err) => this.ngRedux.dispatch({ type: CatActions.CATS_LOADING_ERROR })
+      (err) => this.dispatch({ type: CatActions.CATS_LOADING_ERROR })
       );
   };
 
@@ -77,7 +76,7 @@ export class CatActions {
     return this.cats
       .delete(id)
       .subscribe(n => {
-        this.ngRedux.dispatch({
+        this.dispatch({
           type: CatActions.CAT_DELETED,
           payload: n
         });
@@ -87,9 +86,7 @@ export class CatActions {
   deleteAllCats = () => {
     this.cats.deleteAll()
       .subscribe(
-      cat => {
-        this.ngRedux.dispatch({ type: CatActions.CAT_DELETED, payload: cat });
-      },
+      cat => this.dispatch({ type: CatActions.CAT_DELETED, payload: cat }),
       err => console.error(`err: ${err} `));
 
   };
@@ -104,7 +101,7 @@ export class CatActions {
   updateCat = (cat) => {
     // with epic 
 
-    this.ngRedux.dispatch({ type: CatActions.UPDATE_CAT, payload: cat });
+    this.dispatch({ type: CatActions.UPDATE_CAT, payload: cat });
     /* Without Epic */
 
     /*
@@ -123,17 +120,20 @@ export class CatActions {
   createCat = ({name, headline, description, age, gender, breed}) => {
     // for now, to avoid image uploading / etc, just pick a random 
     // kitty cat from placeKitten - meow!
+
+    /* With Epic */
     const randomImage = randomRange(100, 200);
     const imageUrl = `https://placekitten.com/${randomImage}/${randomImage}`;
 
     const id = generateId();
-    this.ngRedux.dispatch({
+    this.dispatch({
       type: CatActions.CREATE_CAT,
       payload: {
         id, name, description, headline, imageUrl, age, gender, breed
       }
     });
 
+    /* Without Epic */
     /*
     this.ngRedux.dispatch({type: CatActions.CREATING_CAT});
     this.cats

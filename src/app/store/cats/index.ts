@@ -1,4 +1,4 @@
-export * from './cats.reducer';
-export * from './cat.actions';
-export * from './cat.epics';
-export * from './cat.types';
+export { cats } from './cats.reducer';
+export { CatActions } from './cat.actions';
+export { CatEpics } from './cat.epics';
+export { ICat, ICats } from './cat.types';

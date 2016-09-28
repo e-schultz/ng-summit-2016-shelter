@@ -1,12 +1,12 @@
-declare interface ICodeValue {
+interface ICodeValue {
   id: string;
   label: string;
 }
 
-declare interface ICodeTable extends Array<ICodeValue> { }
+interface ICodeTable extends Array<ICodeValue> { }
 
 
-declare interface ICodeTables {
+interface ICodeTables {
   breeds: ICodeTable;
   ages: ICodeTable;
   genders: ICodeTable;
