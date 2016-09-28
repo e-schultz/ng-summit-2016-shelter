@@ -74,7 +74,9 @@ export class AppComponent implements OnInit {
 
 
   displayAddCat() {
-    this.catActions.selectCat({});
+    this.catActions.selectCat({
+      id: 'new'
+    });
   }
 
   submitCat(catModel) {
