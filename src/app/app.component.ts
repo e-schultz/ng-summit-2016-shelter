@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { ICat, CatActions } from './store';
-import { MdSidenav } from '@angular2-material/sidenav';
+import { MdSidenav } from '@angular/material/sidenav';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
 import { filterCheck } from './store';
