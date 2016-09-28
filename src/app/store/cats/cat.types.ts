@@ -1,4 +1,4 @@
-declare interface ICat {
+interface ICat {
   id: string;
   name: string;
   headline: string;
@@ -9,5 +9,6 @@ declare interface ICat {
   gender: string;
 };
 
-declare interface ICats extends Array<ICat> { }
+interface ICats extends Array<ICat> { }
+
 export { ICat, ICats };

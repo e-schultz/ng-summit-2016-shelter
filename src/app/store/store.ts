@@ -15,5 +15,11 @@ export interface IAppState {
 };
 
 export const middleware = [createLogger({level: 'info', collapse: true })];
-export const rootReducer = combineReducers<IAppState>({ cats, catEdit, codeTables, filters, catsLoading });
+
+export const rootReducer = combineReducers<IAppState>({
+  cats,
+  catEdit,
+  codeTables,
+  filters,
+  catsLoading });
 

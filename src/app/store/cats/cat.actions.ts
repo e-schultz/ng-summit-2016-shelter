@@ -27,11 +27,18 @@ export class CatActions {
   static CAT_DELETED = 'CAT_DELETED';
   static CAT_SELECTED = 'CAT_SELECTED';
   static CAT_CLEARED = 'CAT_CLEARED';
-
+  static CAT_FORM_UPDATE = 'CAT_FORM_UPDATE';
+  static CAT_FORM_UPDATED = 'CAT_FORM_UPDATED';
   public bob: () => number;
 
   constructor(private ngRedux: NgRedux<IAppState>, private cats: CatsService) { };
 
+  updateCatForm = (cat) => {
+    this.ngRedux.dispatch({
+      type: CatActions.CAT_FORM_UPDATE,
+      payload: cat
+    });
+  }
   clearSelectedCat = () => {
     if (this.ngRedux.getState().catEdit.isEditing) {
       this.ngRedux.dispatch({ type: CatActions.CAT_CLEARED });

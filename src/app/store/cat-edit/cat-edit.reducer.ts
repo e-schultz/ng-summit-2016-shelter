@@ -11,11 +11,15 @@ let { CAT_SELECTED,
   CAT_CREATED,
   CAT_UPDATED,
   CAT_UPDATE_ERROR,
-  CAT_CREATE_ERROR } = CatActions;
+  CAT_CREATE_ERROR, CAT_FORM_UPDATED } = CatActions;
 
-export const catEdit = (state:ICatEdit = INITIAL_STATE, action) => {
+export const catEdit = (state: ICatEdit = INITIAL_STATE, action) => {
 
   switch (action.type) {
+    case CAT_FORM_UPDATED:
+    return Object.assign({},
+      state,
+      {currentCat: action.payload});
     case CAT_SELECTED:
       return Object.assign({},
         state,

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { MdCardModule } from '@angular2-material/card';
@@ -35,6 +35,7 @@ import { CatShortListComponent } from './cats/cat-short-list/cat-short-list.comp
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     MdCheckboxModule.forRoot(),
     MdRadioModule.forRoot(),
@@ -59,8 +60,9 @@ export class AppModule {
 
     const createCatEpic = createEpicMiddleware(catEpics.create);
     const updateCatEpic = createEpicMiddleware(catEpics.update);
+    const catFormEpic = createEpicMiddleware(catEpics.updateCatForm);
     let enhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
 
-    ngRedux.configureStore(rootReducer, {}, [...middleware, createCatEpic, updateCatEpic], [...enhancers]);
+    ngRedux.configureStore(rootReducer, {}, [...middleware, createCatEpic, updateCatEpic, catFormEpic], [...enhancers]);
   }
 }
