@@ -14,7 +14,7 @@ export const breeds = (state = INITIAL_STATE, action) => {
       return [...state, action.payload];
     case BREED_UPDATED:
       return state.map(n => {
-         return n.id === action.payload.id ? n :  Object.assign({}, n, { label: action.payload.label });
+         return n.id !== action.payload.id ? n :  Object.assign({}, n, { label: action.payload.label });
       });
     case BREED_DELETED:
       return state.filter(n => n.id === action.payload.id);
