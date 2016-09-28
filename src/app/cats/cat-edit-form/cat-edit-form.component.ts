@@ -33,7 +33,7 @@ export class CatEditFormComponent implements OnInit, OnDestroy, OnChanges {
     let { cat } = changes;
     if (this.catForm && cat) {
       this.settingValue$.next(true);
-      this.catForm.setValue(cat.currentValue, {onlySelf: false});
+      this.catForm.patchValue(cat.currentValue, {onlySelf: false});
       this.settingValue$.next(false);
     }
 

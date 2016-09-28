@@ -94,7 +94,7 @@ export class CatActions {
 
   };
   submitCat = (cat) => {
-    if (!cat.id) {
+    if (!cat.id || cat.id === 'new') {
       this.createCat(cat);
     } else {
       this.updateCat(cat);
