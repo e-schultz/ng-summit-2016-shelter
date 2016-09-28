@@ -12,15 +12,27 @@ import 'rxjs/add/operator/combineLatest';
 import { Observable } from 'rxjs';
 
 
-let createErrorHandler = (errType) => err => Observable.of({ type: errType, payload: err });
-let createSuccessHandler = (successType) => result => ({ type: successType, payload: result });
+const createActionObservable = (errType) => err => Observable.of({ type: errType, payload: err });
+const createAction = (successType) => result => ({ type: successType, payload: result });
+
+// const catCreatError = createActionObservable(CatActions.CAT_CREATE_ERROR);
+// const catCreated = createAction(CatActions.CAT_CREATED);
+
+// const catUpdateError = createActionObservable({ type: CatActions.CAT_UPDATE_ERROR });
+// const catUpdated = createAction(CatActions.CAT_UPDATED);
 
 @Injectable()
 export class CatEpics {
   dispatch: any;
-  constructor(private cats: CatsService, ngRedux: NgRedux<IAppState>) {
+  
+  catCreatError = createActionObservable(CatActions.CAT_CREATE_ERROR);
+  catCreated = createAction(CatActions.CAT_CREATED);
+  catUpdateError = createActionObservable({ type: CatActions.CAT_UPDATE_ERROR });
+  catUpdated = createAction(CatActions.CAT_UPDATED);
 
+  constructor(private cats: CatsService, private ngRedux: NgRedux<IAppState>) {
 
+    
     this.dispatch = ngRedux.dispatch;
 
     /*cats.watch()
@@ -62,33 +74,41 @@ export class CatEpics {
 
   create = (action$: ActionsObservable<IPayloadAction>) => {
     let dispatch = this.dispatch;
-    let errorHandler = createErrorHandler(CatActions.CAT_CREATE_ERROR);
-    let catCreated = createSuccessHandler(CatActions.CAT_CREATED);
-
     let createCat = ({payload}) => this.cats.create(payload)
-      .map(result => catCreated(result))
-      .catch(err => errorHandler(err));
+      .map(result => this.catCreated(result))
+      .catch(err => this.catCreatError(err));
 
     return action$.ofType(CatActions.CREATE_CAT)
       .do(n => dispatch({ type: CatActions.CREATING_CAT }))
       .mergeMap(n => createCat(n));
+
+    /*
+    Does the same as the above, but without some of the helper functions.
+
+    return action$.ofType(CatActions.CREATE_CAT)
+      .do(n => this.ngRedux.dispatch({ type: CatActions.CREATING_CAT }))
+      .mergeMap(action => {
+        return this.cats
+          .create(action.payload)
+          .map(result => {
+            return {  type: CatActions.CAT_CREATED, payload: result };
+          })
+          .catch(err => Observable.of({ type: CatActions.CAT_CREATE_ERROR, payload: err }));
+      });*/
   }
 
   update = (action$: ActionsObservable<IPayloadAction>) => {
     let dispatch = this.dispatch;
-    let errorHandler = createErrorHandler({ type: CatActions.CAT_UPDATE_ERROR });
-    let catUpdated = createSuccessHandler(CatActions.CAT_UPDATED);
-
     let updateCat = ({payload}) => this.cats.update(payload)
-      .map(result => catUpdated(result))
-      .catch(err => errorHandler(err));
+      .map(result => this.catUpdated(result))
+      .catch(err => this.catUpdateError(err));
 
     return action$.ofType(CatActions.UPDATE_CAT)
       .do(n => dispatch({ type: CatActions.UPDATING_CAT }))
       .mergeMap(n => updateCat(n));
 
 
-  }
+  };
 
   updateCatForm = (action$: ActionsObservable<IPayloadAction>) => {
 
@@ -96,7 +116,7 @@ export class CatEpics {
       .ofType(CatActions.CAT_FORM_UPDATE)
       .debounceTime(500)
       .map(n => Object.assign({}, n, { type: CatActions.CAT_FORM_UPDATED }));
-  }
+  };
 
 
 }
