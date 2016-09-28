@@ -1,2 +1,2 @@
-export * from './cats-loading.reducer';
-export * from './cats-loading.types';
+export { catsLoading } from './cats-loading.reducer';
+export { ICatsLoading } from './cats-loading.types';

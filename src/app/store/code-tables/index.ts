@@ -1,3 +1,3 @@
-export * from './code-table.types';
+export { ICodeValue, ICodeTable, ICodeTables } from './code-table.types';
 export { codeTables } from './code-tables.reducer';
-export * from './code-tables.selectors';
+export { catBreeds, catAges, catGenders } from './code-tables.selectors';

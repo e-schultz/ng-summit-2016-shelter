@@ -1,2 +1,2 @@
-export * from './cat-edit.reducer';
-export * from './cat-edit.types';
+export { catEdit } from './cat-edit.reducer';
+export { ICatEdit } from './cat-edit.types';

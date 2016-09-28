@@ -1,5 +1,6 @@
 import { ICodeTable } from './code-table.types';
 import { BreedActions } from './breeds.actions';
+
 export const INITIAL_STATE: ICodeTable = [
   { id: 'munchkin', label: 'Munchkin', },
   { id: 'domesticShort', label: 'Domestic Short', },
@@ -13,14 +14,7 @@ export const breeds = (state = INITIAL_STATE, action) => {
       return [...state, action.payload];
     case BREED_UPDATED:
       return state.map(n => {
-        if (n.id === action.payload.id) {
-          let result = Object.assign({}, n, { label: action.payload.label });
-          console.log('result is!', result);
-          return result;
-        } else {
-          return n;
-        }
-
+         return n.id !== action.payload.id ? n :  Object.assign({}, n, { label: action.payload.label });
       });
     case BREED_DELETED:
       return state.filter(n => n.id === action.payload.id);
