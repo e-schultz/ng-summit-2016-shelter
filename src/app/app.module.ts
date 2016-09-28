@@ -22,6 +22,8 @@ import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 import { CatFilterContainerComponent } from './cats/cat-filter-container/cat-filter-container.component';
 import { CatFilterListComponent } from './cats/cat-filter-list/cat-filter-list.component';
 import { CatShortListComponent } from './cats/cat-short-list/cat-short-list.component';
+const persistState = require('redux-localstorage');
+
 
 @NgModule({
   declarations: [
@@ -57,11 +59,16 @@ export class AppModule {
     horizon: HorizonService,
     devTools: DevToolsExtension,
     catEpics: CatEpics) {
-
+    const storage = persistState('', {
+      key: 'shelter-cats',
+      serialize: s => JSON.stringify(s),
+      deserialize: s => JSON.parse(s),
+    });
+    let enhancers = [storage];
     const createCatEpic = createEpicMiddleware(catEpics.create);
     const updateCatEpic = createEpicMiddleware(catEpics.update);
     const catFormEpic = createEpicMiddleware(catEpics.updateCatForm);
-    let enhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
+    enhancers = devTools.isEnabled() ? [...enhancers, devTools.enhancer()] : [...enhancers];
 
     ngRedux.configureStore(rootReducer, {}, [...middleware, createCatEpic, updateCatEpic, catFormEpic], [...enhancers]);
   }

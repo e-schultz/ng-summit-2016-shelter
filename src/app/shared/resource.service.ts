@@ -16,6 +16,10 @@ export abstract class ResourceService<T> {
     this.collection = horizonService.horizon(collectionName);
   }
 
+  watch(options:{rawChanges: boolean} = {rawChanges: true}) {
+    return this.collection.watch(options);
+  }
+  
   delete = (id) => {
     return this.collection.remove({ id })
     .delay(randomRange(MIN_DELAY, MAX_DELAY));
