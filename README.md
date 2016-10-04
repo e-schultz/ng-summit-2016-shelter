@@ -1,3 +1,7 @@
+# Slides
+
+Slides from the conference are [available online](http://www.slideshare.net/EvanSchultz1/evan-schultz-angular-summit-2016-66530584)
+
 # NgSummit2016Shelter
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.11-webpack.8.
